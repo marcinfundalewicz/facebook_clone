@@ -1,0 +1,13 @@
+# IntelliJ
+.idea/
+*.iml
+
+# System files
+.DS_Store
+
+# Node / frontend
+node_modules/
+dist/
+
+# Java / backend
+target/
