@@ -1,4 +1,4 @@
-package domain.user;
+package com.example.facebookclone.domain.user;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
@@ -27,8 +27,6 @@ public class User {
 
     @Column(nullable = false)
     private LocalDateTime createdAt;
-
-    protected User() {}
 
     public Long getId() {
         return id;
