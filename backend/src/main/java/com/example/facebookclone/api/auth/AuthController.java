@@ -1,5 +1,7 @@
 package com.example.facebookclone.api.auth;
 
+import api.auth.dto.LoginRequest;
+import api.auth.dto.LoginResponse;
 import api.auth.dto.RegisterRequest;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +22,9 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public void login() {}
+    public LoginResponse login(@Valid @RequestBody LoginRequest request) {
+        return authService.login(request);
+    }
 
     @PostMapping("/logout")
     public void logout() {}
