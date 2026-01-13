@@ -6,6 +6,8 @@ import api.auth.dto.RegisterRequest;
 import com.example.facebookclone.domain.user.User;
 import com.example.facebookclone.domain.user.UserRepository;
 import com.example.facebookclone.domain.user.UserRole;
+import com.example.facebookclone.exception.BadRequestException;
+import com.example.facebookclone.exception.UnauthorizedException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -29,11 +31,11 @@ public class AuthService {
     public void register(RegisterRequest request) {
 
         if (userRepository.existsByEmail(request.getEmail())) {
-            throw new IllegalArgumentException("Email already in use");
+            throw new BadRequestException("Email already in use");
         }
 
         if (userRepository.existsByUsername(request.getUsername())) {
-            throw new IllegalArgumentException("Username already in use");
+            throw new BadRequestException("Username already in use");
         }
 
         User user = new User();
@@ -48,13 +50,13 @@ public class AuthService {
     public LoginResponse login(LoginRequest request) {
 
         User user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new RuntimeException("Invalid credentials"));
+                .orElseThrow(() -> new UnauthorizedException("Invalid email or password"));
 
         if (!passwordEncoder.matches(
                 request.getPassword(),
                 user.getPassword()
         )) {
-            throw new RuntimeException("Invalid credentials");
+            throw new UnauthorizedException("Invalid email or password");
         }
 
         String token = jwtService.generateToken(user);
