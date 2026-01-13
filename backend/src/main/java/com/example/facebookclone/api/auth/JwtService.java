@@ -4,14 +4,17 @@ import com.example.facebookclone.domain.user.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.stereotype.Service;
 
+import java.security.Key;
 import java.util.Date;
 
 @Service
 public class JwtService {
 
-    private static final String SECRET_KEY = "very-secret-key";
+    private static final String SECRET_KEY = "ZmFjZWJvb2stY2xvbmUtc3VwZXItc2VjcmV0LWtleS0xMjM0NTY3ODkw";
 
     public String extractSubject(String token) {
         return extractAllClaims(token).getSubject();
@@ -45,5 +48,10 @@ public class JwtService {
                 ))
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
                 .compact();
+    }
+
+    private Key getSignInKey() {
+        byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
+        return Keys.hmacShaKeyFor(keyBytes);
     }
 }
