@@ -22,7 +22,7 @@ public class Post {
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
-    protected Post() {
+    public Post() {
     }
 
     public Long getId() {
