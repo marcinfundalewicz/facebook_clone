@@ -1,16 +1,36 @@
 package com.example.facebookclone.api.posts;
 
+import com.example.facebookclone.api.posts.dto.PostCreateRequest;
+import com.example.facebookclone.api.posts.dto.PostResponse;
+import com.example.facebookclone.domain.user.User;
+import jakarta.validation.Valid;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/posts")
 public class PostController {
 
+    private final PostService postService;
+
+    public PostController(PostService postService) {
+        this.postService = postService;
+    }
+
     @GetMapping
-    public void getFeed() {}
+    public List<PostResponse> getFeed() {
+        return postService.getFeed();
+    }
 
     @PostMapping
-    public void createPost() {}
+    public void createPost(
+            @Valid @RequestBody PostCreateRequest request,
+            @AuthenticationPrincipal User user
+            ) {
+        postService.create(request, user);
+    }
 
     @GetMapping("/{id}")
     public void getPost(@PathVariable Long id) {}
