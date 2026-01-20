@@ -1,0 +1,35 @@
+package com.example.facebookclone.api.comments;
+
+import com.example.facebookclone.api.comments.dto.CommentCreateRequest;
+import com.example.facebookclone.domain.user.User;
+import jakarta.validation.Valid;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api")
+public class CommentController {
+
+    private final CommentService commentService;
+
+    public CommentController(CommentService commentService) {
+        this.commentService = commentService;
+    }
+
+    @PostMapping("/posts/{postId}/comments")
+    public void addComment(
+            @PathVariable Long postId,
+            @Valid @RequestBody CommentCreateRequest request,
+            @AuthenticationPrincipal User user
+            ) {
+        commentService.addComment(postId, request, user);
+    }
+
+    @DeleteMapping("/comments/{commentId}")
+    public void deleteComment(
+            @PathVariable Long commentId,
+            @AuthenticationPrincipal User user
+    ) {
+        commentService.deleteComment(commentId, user);
+    }
+}
