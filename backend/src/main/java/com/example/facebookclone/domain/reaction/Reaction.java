@@ -34,7 +34,7 @@ public class Reaction {
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
-    protected Reaction() {}
+    public Reaction() {}
 
     public Long getId() {
         return id;
