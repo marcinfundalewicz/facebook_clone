@@ -21,21 +21,17 @@ public class JwtService {
     }
 
     public boolean isTokenValid(String token, String subject) {
-        final String tokenSubject = extractSubject(token);
-        return tokenSubject.equals(subject) && !isTokenExpired(token);
+        return subject.equals(extractSubject(token)) && !isTokenExpired(token);
     }
 
     private boolean isTokenExpired(String token) {
-        return extractExpiration(token).before(new Date());
-    }
-
-    private Date extractExpiration(String token) {
-        return extractAllClaims(token).getExpiration();
+        return extractAllClaims(token).getExpiration().before(new Date());
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts.parser()
-                .setSigningKey(SECRET_KEY)
+        return Jwts.parserBuilder()
+                .setSigningKey(getSigningKey())
+                .build()
                 .parseClaimsJws(token)
                 .getBody();
     }
@@ -46,11 +42,11 @@ public class JwtService {
                 .setExpiration(new Date(
                         System.currentTimeMillis() + 1000 * 60 * 60
                 ))
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+                .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
-    private Key getSignInKey() {
+    private Key getSigningKey() {
         byte[] keyBytes = Decoders.BASE64.decode(SECRET_KEY);
         return Keys.hmacShaKeyFor(keyBytes);
     }

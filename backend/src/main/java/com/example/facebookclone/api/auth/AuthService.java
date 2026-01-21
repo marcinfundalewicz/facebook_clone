@@ -1,8 +1,8 @@
 package com.example.facebookclone.api.auth;
 
-import api.auth.dto.LoginRequest;
-import api.auth.dto.LoginResponse;
-import api.auth.dto.RegisterRequest;
+import com.example.facebookclone.api.auth.dto.LoginRequest;
+import com.example.facebookclone.api.auth.dto.LoginResponse;
+import com.example.facebookclone.api.auth.dto.RegisterRequest;
 import com.example.facebookclone.domain.user.User;
 import com.example.facebookclone.domain.user.UserRepository;
 import com.example.facebookclone.domain.user.UserRole;

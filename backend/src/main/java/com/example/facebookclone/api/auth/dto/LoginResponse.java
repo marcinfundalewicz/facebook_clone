@@ -1,4 +1,4 @@
-package api.auth.dto;
+package com.example.facebookclone.api.auth.dto;
 
 public class LoginResponse {
 

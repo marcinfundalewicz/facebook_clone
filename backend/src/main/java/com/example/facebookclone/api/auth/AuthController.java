@@ -1,8 +1,8 @@
 package com.example.facebookclone.api.auth;
 
-import api.auth.dto.LoginRequest;
-import api.auth.dto.LoginResponse;
-import api.auth.dto.RegisterRequest;
+import com.example.facebookclone.api.auth.dto.LoginRequest;
+import com.example.facebookclone.api.auth.dto.LoginResponse;
+import com.example.facebookclone.api.auth.dto.RegisterRequest;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
