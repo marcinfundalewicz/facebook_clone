@@ -2,6 +2,8 @@ package com.example.facebookclone.api.posts;
 
 import com.example.facebookclone.api.posts.dto.PostCreateRequest;
 import com.example.facebookclone.api.posts.dto.PostResponse;
+import com.example.facebookclone.api.reactions.ReactionService;
+import com.example.facebookclone.domain.reaction.Reaction;
 import com.example.facebookclone.domain.user.User;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
@@ -13,9 +15,11 @@ import org.springframework.web.bind.annotation.*;
 public class PostController {
 
     private final PostService postService;
+    private final ReactionService reactionService;
 
-    public PostController(PostService postService) {
+    public PostController(PostService postService, ReactionService reactionService) {
         this.postService = postService;
+        this.reactionService = reactionService;
     }
 
     @GetMapping
@@ -41,7 +45,9 @@ public class PostController {
     public void deletePost(@PathVariable Long id) {}
 
     @PostMapping("/{id}/reactions")
-    public void react(@PathVariable Long id) {}
+    public void react(@PathVariable Long id, @AuthenticationPrincipal User user) {
+        reactionService.toggleReaction(id, user);
+    }
 
     @PostMapping("/{id}/comments")
     public void comment(@PathVariable Long id) {}
