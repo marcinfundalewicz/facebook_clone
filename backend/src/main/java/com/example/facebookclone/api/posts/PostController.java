@@ -25,9 +25,10 @@ public class PostController {
     @GetMapping
     public Page<PostResponse> getFeed(
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size
+            @RequestParam(defaultValue = "10") int size,
+            @AuthenticationPrincipal User user
     ) {
-        return postService.getFeed(page, size);
+        return postService.getFeed(page, size, user);
     }
 
     @PostMapping

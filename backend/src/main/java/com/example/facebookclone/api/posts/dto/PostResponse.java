@@ -7,12 +7,18 @@ public class PostResponse {
     private String content;
     private String authorUsername;
     private LocalDateTime createdAt;
+    private long likesCount;
+    private long commentsCount;
+    private boolean likedByMe;
 
-    public PostResponse(Long id, String content, String authorUsername, LocalDateTime createdAt) {
+    public PostResponse(Long id, String content, String authorUsername, LocalDateTime createdAt, long likesCount, long commentsCount, boolean likedByMe) {
         this.id = id;
         this.content = content;
         this.authorUsername = authorUsername;
         this.createdAt = createdAt;
+        this.likesCount = likesCount;
+        this.commentsCount = commentsCount;
+        this.likedByMe = likedByMe;
     }
 
     public Long getId() {
@@ -45,5 +51,29 @@ public class PostResponse {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public long getLikesCount() {
+        return likesCount;
+    }
+
+    public void setLikesCount(long likesCount) {
+        this.likesCount = likesCount;
+    }
+
+    public long getCommentsCount() {
+        return commentsCount;
+    }
+
+    public void setCommentsCount(long commentsCount) {
+        this.commentsCount = commentsCount;
+    }
+
+    public boolean isLikedByMe() {
+        return likedByMe;
+    }
+
+    public void setLikedByMe(boolean likedByMe) {
+        this.likedByMe = likedByMe;
     }
 }
