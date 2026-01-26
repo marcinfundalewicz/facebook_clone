@@ -11,5 +11,5 @@ public interface ReactionRepository extends JpaRepository<Reaction, Long> {
 
     long countByPost(Post post);
 
-    boolean existByPostAndUser(Post post, User user);
+    boolean existsByPostAndUser(Post post, User user);
 }

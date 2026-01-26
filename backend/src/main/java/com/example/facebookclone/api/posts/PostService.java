@@ -42,7 +42,7 @@ public class PostService {
                 .map(post -> {
                     long likesCount = reactionRepository.countByPost(post);
                     long commentsCount = commentRepository.countByPost(post);
-                    boolean likedByMe = reactionRepository.existByPostAndUser(post, user);
+                    boolean likedByMe = reactionRepository.existsByPostAndUser(post, user);
                     return new PostResponse(
                             post.getId(),
                             post.getContent(),
