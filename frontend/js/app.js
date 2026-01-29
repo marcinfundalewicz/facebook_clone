@@ -8,8 +8,9 @@ const posts = [
         id: 1,
         author: "testuser",
         content: "Hello world!",
+        createdAt: new Date(),
         likes: 0,
-        createdAt: new Date()
+        liked: false
     }
 ];
 
@@ -30,6 +31,7 @@ form.addEventListener("submit", function (event) {
 });
 
 function renderPosts(posts) {
+    feed.innerHTML = "";
     posts.forEach(post => {
         const article = document.createElement("article");
         article.innerHTML = `
@@ -38,13 +40,21 @@ function renderPosts(posts) {
         <time>${post.createdAt.toLocaleString()}</time>
       </header>
       <p>${post.content}</p>
-      <footer>
-        <button>Like</button>
-        <span>${post.likes} likes</span>
-      </footer>
     `;
+        const footer = document.createElement("footer");
+        const button = document.createElement("button");
+        button.textContent = post.liked ? "Unlike" : "Like";
+        const span = document.createElement("span");
+        span.textContent = `${post.likes} likes`;
+        button.addEventListener("click", () => {
+            post.liked = !post.liked;
+            post.likes += post.liked ? 1 : -1;
+            renderPosts(posts);
+        });
+        footer.append(button, span);
+        article.appendChild(footer);
         feed.appendChild(article);
     });
 }
-
 renderPosts(posts);
+
