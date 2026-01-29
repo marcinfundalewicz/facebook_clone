@@ -37,13 +37,17 @@ function renderPosts(posts) {
         article.innerHTML = `
       <header>
         <strong>${post.author}</strong>
-        <time>${post.createdAt.toLocaleString()}</time>
+        <time datetime="${post.createdAt.toISOString()}">
+            ${post.createdAt.toLocaleString()}
+        </time>
       </header>
       <p>${post.content}</p>
     `;
         const footer = document.createElement("footer");
         const button = document.createElement("button");
         button.textContent = post.liked ? "Unlike" : "Like";
+        button.setAttribute("aria-pressed", post.liked);
+        button.setAttribute("aria-label", post.liked ? "Unlike post" : "Like post");
         const span = document.createElement("span");
         span.textContent = `${post.likes} likes`;
         button.addEventListener("click", () => {

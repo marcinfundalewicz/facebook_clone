@@ -87,3 +87,9 @@ button {
         max-width: 700px;
     }
 }
+
+button:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid var(--primary);
+    outline-offset: 2px;
+}
