@@ -1,0 +1,27 @@
+header {
+    background-color: var(--primary);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+section {
+    background: var(--bg-card);
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+@media (min-width:  768px) {
+    main {
+        max-width: 700px;
+    }
+}
