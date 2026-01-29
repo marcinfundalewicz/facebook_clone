@@ -1,64 +1,10 @@
-const form = document.getElementById("create-post-form");
-const textarea = document.getElementById("post-content");
-const error = document.getElementById("form-error");
-const feed = document.getElementById("feed");
+import { posts } from "./data.js";
+import { renderPosts } from "./feed.js";
+import { initForm } from "./form.js";
 
-const posts = [
-    {
-        id: 1,
-        author: "testuser",
-        content: "Hello world!",
-        createdAt: new Date(),
-        likes: 0,
-        liked: false
-    }
-];
-
-form.addEventListener("submit", function (event) {
-    event.preventDefault();
-    const content = textarea.value.trim();
-    if (content.length === 0) {
-        error.textContent = "Post cannot be empty";
-        return;
-    }
-    if (content.length > 280) {
-        error.textContent = "Post is too long (max 280 characters)";
-        return;
-    }
-    error.textContent = "";
-    console.log("Post content:", content);
-    textarea.value = "";
+initForm(posts, () => {
+    renderPosts(posts);
 });
 
-function renderPosts(posts) {
-    feed.innerHTML = "";
-    posts.forEach(post => {
-        const article = document.createElement("article");
-        article.innerHTML = `
-      <header>
-        <strong>${post.author}</strong>
-        <time datetime="${post.createdAt.toISOString()}">
-            ${post.createdAt.toLocaleString()}
-        </time>
-      </header>
-      <p>${post.content}</p>
-    `;
-        const footer = document.createElement("footer");
-        const button = document.createElement("button");
-        button.textContent = post.liked ? "Unlike" : "Like";
-        button.setAttribute("aria-pressed", post.liked);
-        button.setAttribute("aria-label", post.liked ? "Unlike post" : "Like post");
-        const span = document.createElement("span");
-        span.textContent = `${post.likes} likes`;
-        button.addEventListener("click", () => {
-            post.liked = !post.liked;
-            post.likes += post.liked ? 1 : -1;
-            renderPosts(posts);
-        });
-        footer.append(button, span);
-        article.appendChild(footer);
-        feed.appendChild(article);
-    });
-}
 renderPosts(posts);
 
