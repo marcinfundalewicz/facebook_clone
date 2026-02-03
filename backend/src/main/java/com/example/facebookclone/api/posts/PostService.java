@@ -69,7 +69,7 @@ public class PostService {
     private PostResponse toResponse(Post post, User user) {
         long likesCount = reactionRepository.countByPost(post);
         long commentsCount = commentRepository.countByPost(post);
-        boolean likedByMe = reactionRepository.existsByPostAndUser(post, user);
+        boolean likedByMe = user != null && reactionRepository.existsByPostAndUser(post, user);
 
         return new PostResponse(
                 post.getId(),
