@@ -68,7 +68,7 @@ public class FriendshipService {
                 .toList();
     }
 
-    public List<Long> getFriendsId(User currentUser) {
+    public List<Long> getFriendIds(User currentUser) {
         List<Friendship> friendships = friendshipRepository.findByStatusAndRequesterOrStatusAndAddressee(
                 FriendshipStatus.ACCEPTED,
                 currentUser,
