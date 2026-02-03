@@ -9,4 +9,10 @@ public interface FriendshipRepository extends JpaRepository<Friendship, Long> {
     Optional<Friendship> findByRequesterAndAddressee(User requester, User addressee);
     List<Friendship> findByRequesterOrAddressee(User user1, User user2);
     boolean existsByRequesterAndReceiver(User requester, User receiver);
+    List<Friendship> findByStatusAndRequesterOrStatusAndAddressee(
+            FriendshipStatus status1,
+            User requester,
+            FriendshipStatus status2,
+            User addressee
+    );
 }
