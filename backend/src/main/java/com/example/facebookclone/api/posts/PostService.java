@@ -41,6 +41,10 @@ public class PostService {
     }
 
     public Page<PostResponse> getFeed(int page, int size, User user) {
+
+        page = Math.max(page, 0);
+        size = Math.min(Math.max(size, 1), 50);
+
         PageRequest pegable = PageRequest.of(page, size, Sort.by("createdAt").descending());
         return postRepository.findAll(pegable)
                 .map(post -> toResponse(post, user));
@@ -65,7 +69,7 @@ public class PostService {
     private PostResponse toResponse(Post post, User user) {
         long likesCount = reactionRepository.countByPost(post);
         long commentsCount = commentRepository.countByPost(post);
-        boolean likedByMe = reactionRepository.existsByPostAndUser(post, user);
+        boolean likedByMe = user != null && reactionRepository.existsByPostAndUser(post, user);
 
         return new PostResponse(
                 post.getId(),
