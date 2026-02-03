@@ -37,4 +37,16 @@ public class FriendshipService {
 
         friendshipRepository.save(friendship);
     }
+
+    public void acceptRequest(Long friendshipId, User currentUser) {
+        Friendship friendship = friendshipRepository.findById(friendshipId)
+                .orElseThrow(() -> new NotFoundException("Request not found"));
+
+        if(!friendship.getAddressee().getId().equals(currentUser.getId())) {
+            throw new BadRequestException("Not your request");
+        }
+            friendship.accept();
+
+            friendshipRepository.save(friendship);
+    }
 }

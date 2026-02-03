@@ -56,4 +56,8 @@ public class Friendship {
     public Instant getCreatedAd() {
         return createdAd;
     }
+
+    public void accept() {
+       this.status = FriendshipStatus.ACCEPTED;
+    }
 }
