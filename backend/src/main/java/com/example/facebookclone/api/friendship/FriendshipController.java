@@ -20,7 +20,15 @@ public class FriendshipController {
     public void sendRequest(
             @PathVariable Long userId,
             @AuthenticationPrincipal User user
-            ) {
+    ) {
         friendshipService.sendRequest(userId, user);
+    }
+
+    @PostMapping("/{id}/accept")
+    public void accept(
+            @PathVariable Long id,
+            @AuthenticationPrincipal User user
+    ) {
+        friendshipService.acceptRequest(id, user);
     }
 }
