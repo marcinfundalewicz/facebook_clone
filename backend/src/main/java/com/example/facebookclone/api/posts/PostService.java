@@ -51,9 +51,12 @@ public class PostService {
         size = Math.min(size, 50);
         page = Math.max(page, 0);
 
-        List<Long>  ids = new ArrayList<>(friendshipService.getFriendIds(user));
+        List<Long> ids = new ArrayList<>(friendshipService.getFriendIds(user));
         ids.add(user.getId());
-        PageRequest pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
+        PageRequest pageable = PageRequest.of(
+                        page,
+                        size,
+                        Sort.by(Sort.Direction.DESC,"createdAt", "id"));
         return postRepository.findByAuthor_IdIn(ids, pageable)
                 .map(post -> toResponse(post, user));
 
