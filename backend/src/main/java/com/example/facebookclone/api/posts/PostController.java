@@ -52,4 +52,14 @@ public class PostController {
 
     @PostMapping("/{id}/comments")
     public void comment(@PathVariable Long id) {}
+
+    @GetMapping("/social")
+    public Page<PostResponse> socialFeed(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @AuthenticationPrincipal User user
+
+    ) {
+        return postService.getSocialFeed(page, size, user);
+    }
 }

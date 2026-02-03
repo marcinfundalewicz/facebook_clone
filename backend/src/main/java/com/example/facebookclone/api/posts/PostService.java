@@ -1,5 +1,6 @@
 package com.example.facebookclone.api.posts;
 
+import com.example.facebookclone.api.friendship.FriendshipService;
 import com.example.facebookclone.api.posts.dto.PostCreateRequest;
 import com.example.facebookclone.api.posts.dto.PostResponse;
 import com.example.facebookclone.api.reactions.ReactionService;
@@ -21,11 +22,13 @@ public class PostService {
     private final PostRepository postRepository;
     private final ReactionRepository reactionRepository;
     private final CommentRepository commentRepository;
+    private final FriendshipService friendshipService;
 
-    public PostService(PostRepository postRepository, ReactionRepository reactionRepository, CommentRepository commentRepository) {
+    public PostService(PostRepository postRepository, ReactionRepository reactionRepository, CommentRepository commentRepository, FriendshipService friendshipService) {
         this.postRepository = postRepository;
         this.reactionRepository = reactionRepository;
         this.commentRepository = commentRepository;
+        this.friendshipService = friendshipService;
     }
 
     public void create(PostCreateRequest request, User author) {
@@ -39,19 +42,31 @@ public class PostService {
     public Page<PostResponse> getFeed(int page, int size, User user) {
         PageRequest pegable = PageRequest.of(page, size, Sort.by("createdAt").descending());
         return postRepository.findAll(pegable)
-                .map(post -> {
-                    long likesCount = reactionRepository.countByPost(post);
-                    long commentsCount = commentRepository.countByPost(post);
-                    boolean likedByMe = reactionRepository.existsByPostAndUser(post, user);
-                    return new PostResponse(
-                            post.getId(),
-                            post.getContent(),
-                            post.getAuthor().getUsername(),
-                            post.getCreatedAt(),
-                            likesCount,
-                            commentsCount,
-                            likedByMe
-                    );
-                });
+                .map(post -> toResponse(post, user));
+    }
+
+    public Page<PostResponse> getSocialFeed(int page, int size, User user) {
+        List<Long>  ids = friendshipService.getFriendIds(user);
+        ids.add(user.getId());
+        PageRequest pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
+        return postRepository.findByAuthor_IdIn(ids, pageable)
+                .map(post -> toResponse(post, user));
+
+    }
+
+    private PostResponse toResponse(Post post, User user) {
+        long likesCount = reactionRepository.countByPost(post);
+        long commentsCount = commentRepository.countByPost(post);
+        boolean likedByMe = reactionRepository.existsByPostAndUser(post, user);
+
+        return new PostResponse(
+                post.getId(),
+                post.getContent(),
+                post.getAuthor().getUsername(),
+                post.getCreatedAt(),
+                likesCount,
+                commentsCount,
+                likedByMe
+        );
     }
 }
