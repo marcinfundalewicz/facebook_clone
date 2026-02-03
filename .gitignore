@@ -11,3 +11,5 @@ dist/
 
 # Java / backend
 target/
+
+.env
