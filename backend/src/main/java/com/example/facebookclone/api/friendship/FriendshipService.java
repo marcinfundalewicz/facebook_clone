@@ -2,11 +2,14 @@ package com.example.facebookclone.api.friendship;
 
 import com.example.facebookclone.domain.friendship.Friendship;
 import com.example.facebookclone.domain.friendship.FriendshipRepository;
+import com.example.facebookclone.domain.friendship.FriendshipStatus;
 import com.example.facebookclone.domain.user.User;
 import com.example.facebookclone.domain.user.UserRepository;
 import com.example.facebookclone.exception.BadRequestException;
 import com.example.facebookclone.exception.NotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class FriendshipService {
@@ -42,11 +45,26 @@ public class FriendshipService {
         Friendship friendship = friendshipRepository.findById(friendshipId)
                 .orElseThrow(() -> new NotFoundException("Request not found"));
 
-        if(!friendship.getAddressee().getId().equals(currentUser.getId())) {
+        if (!friendship.getAddressee().getId().equals(currentUser.getId())) {
             throw new BadRequestException("Not your request");
         }
-            friendship.accept();
+        friendship.accept();
 
-            friendshipRepository.save(friendship);
+        friendshipRepository.save(friendship);
+    }
+
+    public List<User> getFriends(User currentUser) {
+        List<Friendship> friendships = friendshipRepository.findByStatusAndRequesterOrStatusAndAddressee(
+                FriendshipStatus.ACCEPTED,
+                currentUser,
+                FriendshipStatus.ACCEPTED,
+                currentUser
+        );
+
+        return friendships.stream()
+                .map(f -> f.getRequester().equals(currentUser)
+                        ? f.getAddressee()
+                        : f.getRequester())
+                .toList();
     }
 }
