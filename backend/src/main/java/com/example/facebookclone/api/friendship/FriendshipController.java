@@ -2,10 +2,9 @@ package com.example.facebookclone.api.friendship;
 
 import com.example.facebookclone.domain.user.User;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/friends")
@@ -30,5 +29,10 @@ public class FriendshipController {
             @AuthenticationPrincipal User user
     ) {
         friendshipService.acceptRequest(id, user);
+    }
+
+    @GetMapping
+    public List<User> listFriends(@AuthenticationPrincipal User user) {
+        return friendshipService.getFriends(user);
     }
 }
