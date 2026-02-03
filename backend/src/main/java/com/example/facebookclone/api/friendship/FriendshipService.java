@@ -30,7 +30,7 @@ public class FriendshipService {
         User target = userRepository.findById(targetUserid)
                 .orElseThrow(() -> new NotFoundException("User not found"));
 
-        boolean exists = friendshipRepository.existsByRequesterAndReceiver(currentUser, target);
+        boolean exists = friendshipRepository.existsByRequesterAndAddresseeOrRequesterAndAddressee(currentUser, target, target, currentUser);
 
         if (exists) {
             throw new BadRequestException("Request already exists");

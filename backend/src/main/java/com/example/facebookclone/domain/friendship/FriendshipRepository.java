@@ -15,4 +15,8 @@ public interface FriendshipRepository extends JpaRepository<Friendship, Long> {
             FriendshipStatus status2,
             User addressee
     );
+    boolean existsByRequesterAndAddresseeOrRequesterAndAddressee(
+            User requester1, User addressee1,
+            User requester2, User addressee2
+    );
 }
