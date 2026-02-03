@@ -28,6 +28,10 @@ public class PostController {
             @RequestParam(defaultValue = "10") int size,
             @AuthenticationPrincipal User user
     ) {
+
+        size = Math.min(size, 50);
+        page = Math.max(page, 0);
+
         return postService.getFeed(page, size, user);
     }
 
