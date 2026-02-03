@@ -67,4 +67,19 @@ public class FriendshipService {
                         : f.getRequester())
                 .toList();
     }
+
+    public List<Long> getFriendsId(User currentUser) {
+        List<Friendship> friendships = friendshipRepository.findByStatusAndRequesterOrStatusAndAddressee(
+                FriendshipStatus.ACCEPTED,
+                currentUser,
+                FriendshipStatus.ACCEPTED,
+                currentUser
+        );
+
+        return friendships.stream()
+                .map(f -> f.getRequester().equals(currentUser)
+                        ? f.getAddressee().getId()
+                        : f.getRequester().getId())
+                .toList();
+    }
 }
