@@ -41,6 +41,10 @@ public class PostService {
     }
 
     public Page<PostResponse> getFeed(int page, int size, User user) {
+
+        page = Math.max(page, 0);
+        size = Math.min(Math.max(size, 1), 50);
+
         PageRequest pegable = PageRequest.of(page, size, Sort.by("createdAt").descending());
         return postRepository.findAll(pegable)
                 .map(post -> toResponse(post, user));
