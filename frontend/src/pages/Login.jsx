@@ -1,22 +1,21 @@
-import { useState } from "react";
-import api from "../api";
-import { useAuth } from "../auth/AuthContext";
+import {useState} from "react";
+import {useAuth} from "../auth/AuthContext";
+import {login as loginRequest} from "../api/api.js";
 
 export default function Login() {
-    const { login } = useAuth();
+    const {login} = useAuth();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     async function handleSubmit(e) {
         e.preventDefault();
-
-        const res = await api.post("/auth/login", {
-            email,
-            password
-        });
-
-        login(res.data.token);
+        try {
+            const res = await loginRequest(email, password);
+            login(res.data.token);
+        } catch (error) {
+            alert("Login failed")
+        }
     }
 
     return (
