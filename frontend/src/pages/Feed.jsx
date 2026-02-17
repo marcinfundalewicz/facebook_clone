@@ -1,33 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CreatePost from "../components/CreatePost";
 import PostCard from "../components/PostCard";
+import { getPosts } from "../api/api.js";
 
 export default function Feed() {
     const [posts, setPosts] = useState([]);
 
-    function addPost(content) {
-        const newPost = {
-            id: Date.now(),
-            author: "Ty",
-            content,
-            likes: 0,
-            comments: 0
-        };
+    useEffect(() => {
+        async function loadPosts() {
+            try {
+                const res = await getPosts();
+                setPosts(res.data.content);
+            } catch (err) {
+                console.error("Failed to load posts", err);
+            }
+        }
 
-        setPosts([newPost, ...posts]);
-    }
+        loadPosts();
+    }, []);
 
     return (
         <div>
-            <CreatePost onAddPost={addPost} />
+            <CreatePost />
 
             {posts.map(post => (
                 <PostCard
                     key={post.id}
-                    author={post.author}
+                    author={post.authorUsername}
                     content={post.content}
-                    likes={post.likes}
-                    comments={post.comments}
+                    likes={post.likesCount}
+                    comments={post.commentsCount}
                 />
             ))}
         </div>
