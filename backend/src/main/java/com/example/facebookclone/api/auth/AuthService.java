@@ -34,7 +34,7 @@ public class AuthService {
             throw new BadRequestException("Email already in use");
         }
 
-        if (userRepository.existsByEmail(request.getEmail())) {
+        if (userRepository.existsByUsername(request.getUsername())) {
             throw new BadRequestException("Username already in use");
         }
 
