@@ -7,3 +7,7 @@ export function login(email, password) {
 export function getPosts() {
     return client.get("/api/posts");
 }
+
+export function getFeed(page = 0) {
+    return client.get(`/api/posts?page=${page}&size=10`);
+}

@@ -3,7 +3,6 @@ import CreatePost from "../components/CreatePost";
 import PostCard from "../components/PostCard";
 import { getPosts } from "../api/api.js";
 
-
 export default function Feed() {
     const [posts, setPosts] = useState([]);
 
@@ -11,7 +10,7 @@ export default function Feed() {
         async function loadPosts() {
             try {
                 const res = await getPosts();
-                setPosts(res.data);
+                setPosts(res.data.content);
             } catch (err) {
                 console.error("Failed to load posts", err);
             }
@@ -22,15 +21,15 @@ export default function Feed() {
 
     return (
         <div>
-            <CreatePost/>
+            <CreatePost />
 
             {posts.map(post => (
                 <PostCard
                     key={post.id}
-                    author={post.author}
+                    author={post.authorUsername}
                     content={post.content}
-                    likes={post.likes}
-                    comments={post.comments}
+                    likes={post.likesCount}
+                    comments={post.commentsCount}
                 />
             ))}
         </div>
