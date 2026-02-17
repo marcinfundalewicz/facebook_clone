@@ -5,6 +5,7 @@ import com.example.facebookclone.api.posts.dto.PostResponse;
 import com.example.facebookclone.api.reactions.ReactionService;
 import com.example.facebookclone.domain.reaction.Reaction;
 import com.example.facebookclone.domain.user.User;
+import com.example.facebookclone.exception.UnauthorizedException;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -40,6 +41,9 @@ public class PostController {
             @Valid @RequestBody PostCreateRequest request,
             @AuthenticationPrincipal User user
             ) {
+        if (user == null) {
+            throw new UnauthorizedException("Login required");
+        }
         postService.create(request, user);
     }
 
