@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-username
+      author: marcin
+      changes:
+        - addColumn:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
