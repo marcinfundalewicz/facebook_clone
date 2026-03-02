@@ -9,8 +9,8 @@ export default function PostCard({
                                      commentsCount,
                                      likedByMe
                                  }) {
-    const [likes, setLikes] = useState(likesCount);
-    const [liked, setLiked] = useState(likedByMe);
+    const [likes, setLikes] = useState(likesCount ?? 0);
+    const [liked, setLiked] = useState(likedByMe ?? false);
 
     async function handleLike() {
         if (liked) {

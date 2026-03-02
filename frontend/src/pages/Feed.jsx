@@ -19,9 +19,19 @@ export default function Feed() {
         loadPosts();
     }, []);
 
+    async function handleAddPost(content) {
+        try {
+            await createPost(content);
+            const res = await getPosts();
+            setPosts(res.data.content);
+        } catch (err) {
+            console.error("Create post failed", err);
+        }
+    }
+
     return (
         <div>
-            <CreatePost onAddPost={() => {}}/>
+            <CreatePost onAddPost={handleAddPost}/>
 
             {posts.map(post => (
                 <PostCard
