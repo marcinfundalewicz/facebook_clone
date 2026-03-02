@@ -39,8 +39,8 @@ export default function Feed() {
                     id={post.id}
                     author={post.authorUsername}
                     content={post.content}
-                    likes={post.likesCount}
-                    comments={post.commentsCount}
+                    likesCount={post.likesCount}
+                    commentsCount={post.commentsCount}
                     likedByMe={post.likedByMe}
                 />
             ))}

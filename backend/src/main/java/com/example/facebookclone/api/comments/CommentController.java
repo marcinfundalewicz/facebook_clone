@@ -23,16 +23,18 @@ public class CommentController {
     public void addComment(
             @PathVariable Long postId,
             @Valid @RequestBody CommentCreateRequest request,
-            @AuthenticationPrincipal User user
-            ) {
+            org.springframework.security.core.Authentication authentication
+    ) {
+        User user = (User) authentication.getPrincipal();
         commentService.addComment(postId, request, user);
     }
 
     @DeleteMapping("/comments/{commentId}")
     public void deleteComment(
             @PathVariable Long commentId,
-            @AuthenticationPrincipal User user
+            org.springframework.security.core.Authentication authentication
     ) {
+        User user = (User) authentication.getPrincipal();
         commentService.deleteComment(commentId, user);
     }
 

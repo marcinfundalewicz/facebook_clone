@@ -27,11 +27,14 @@ public class PostController {
     public Page<PostResponse> getFeed(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
-            @AuthenticationPrincipal User user
+            org.springframework.security.core.Authentication authentication
     ) {
 
-        size = Math.min(size, 50);
-        page = Math.max(page, 0);
+        User user = null;
+
+        if (authentication != null && authentication.getPrincipal() instanceof User) {
+            user = (User) authentication.getPrincipal();
+        }
 
         return postService.getFeed(page, size, user);
     }
@@ -54,20 +57,30 @@ public class PostController {
     public void deletePost(@PathVariable Long id) {}
 
     @PostMapping("/{id}/reactions")
-    public void react(@PathVariable Long id, @AuthenticationPrincipal User user) {
+    public void react(
+            @PathVariable Long id,
+            org.springframework.security.core.Authentication authentication
+    ) {
+        if (authentication == null || !(authentication.getPrincipal() instanceof User user)) {
+            throw new UnauthorizedException("Login required");
+        }
+
         reactionService.toggleReaction(id, user);
     }
-
-    @PostMapping("/{id}/comments")
-    public void comment(@PathVariable Long id) {}
 
     @GetMapping("/social")
     public Page<PostResponse> socialFeed(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
-            @AuthenticationPrincipal User user
-
+            org.springframework.security.core.Authentication authentication
     ) {
+
+        User user = null;
+
+        if (authentication != null && authentication.getPrincipal() instanceof User) {
+            user = (User) authentication.getPrincipal();
+        }
+
         return postService.getSocialFeed(page, size, user);
     }
 }

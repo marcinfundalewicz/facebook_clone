@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toggleLike } from "../api/api";
 import CommentSection from "./CommentSection";
 
@@ -12,6 +12,14 @@ export default function PostCard({
                                  }) {
     const [likes, setLikes] = useState(likesCount ?? 0);
     const [liked, setLiked] = useState(likedByMe ?? false);
+
+    useEffect(() => {
+        setLikes(likesCount ?? 0);
+    }, [likesCount]);
+
+    useEffect(() => {
+        setLiked(likedByMe ?? false);
+    }, [likedByMe]);
 
     async function handleLike() {
         const newLiked = !liked;
