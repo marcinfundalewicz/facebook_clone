@@ -13,24 +13,19 @@ export default function PostCard({
     const [liked, setLiked] = useState(likedByMe ?? false);
 
     async function handleLike() {
-        if (liked) {
-            setLikes(prev => prev - 1);
-        } else {
-            setLikes(prev => prev + 1);
-        }
-        setLiked(!liked);
+        const newLiked = !liked;
+        const newLikes = newLiked ? likes + 1 : likes - 1;
+
+        setLiked(newLiked);
+        setLikes(newLikes);
 
         try {
             await toggleLike(id);
         } catch (err) {
             console.error("Like failed", err);
 
-            if (liked) {
-                setLikes(prev => prev + 1);
-            } else {
-                setLikes(prev => prev - 1);
-            }
             setLiked(liked);
+            setLikes(likes);
         }
     }
 

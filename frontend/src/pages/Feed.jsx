@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import CreatePost from "../components/CreatePost";
 import PostCard from "../components/PostCard";
-import { getPosts } from "../api/api.js";
+import { getPosts, createPost } from "../api/api.js";
 
 export default function Feed() {
     const [posts, setPosts] = useState([]);
