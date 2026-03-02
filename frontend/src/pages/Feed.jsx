@@ -21,7 +21,7 @@ export default function Feed() {
 
     return (
         <div>
-            <CreatePost />
+            <CreatePost onAddPost={() => {}}/>
 
             {posts.map(post => (
                 <PostCard

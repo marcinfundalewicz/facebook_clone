@@ -10,8 +10,8 @@ export function getPosts() {
 
 export function getFeed(page = 0) {
     return client.get(`/api/posts?page=${page}&size=10`);
+}
 
     export function toggleLike(postId) {
-        return client.post('/api/posts/$(postId}/reactions')
-    }
+        return client.post('/api/posts/$(postId}/reactions');
 }
