@@ -26,10 +26,12 @@ export default function Feed() {
             {posts.map(post => (
                 <PostCard
                     key={post.id}
+                    id={post.id}
                     author={post.authorUsername}
                     content={post.content}
                     likes={post.likesCount}
                     comments={post.commentsCount}
+                    likedByMe={post.likedByMe}
                 />
             ))}
         </div>
