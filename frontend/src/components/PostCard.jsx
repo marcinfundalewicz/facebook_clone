@@ -1,11 +1,55 @@
-export default function PostCard({ author, content, likes, comments }) {
+import { useState, useEffect } from "react";
+import { toggleLike } from "../api/api";
+import CommentSection from "./CommentSection";
+
+export default function PostCard({
+                                     id,
+                                     author,
+                                     content,
+                                     likesCount,
+                                     commentsCount,
+                                     likedByMe
+                                 }) {
+    const [likes, setLikes] = useState(likesCount ?? 0);
+    const [liked, setLiked] = useState(likedByMe ?? false);
+
+    useEffect(() => {
+        setLikes(likesCount ?? 0);
+    }, [likesCount]);
+
+    useEffect(() => {
+        setLiked(likedByMe ?? false);
+    }, [likedByMe]);
+
+    async function handleLike() {
+        const newLiked = !liked;
+        const newLikes = newLiked ? likes + 1 : likes - 1;
+
+        setLiked(newLiked);
+        setLikes(newLikes);
+
+        try {
+            await toggleLike(id);
+        } catch (err) {
+            console.error("Like failed", err);
+
+            setLiked(liked);
+            setLikes(likes);
+        }
+    }
+
     return (
         <article>
             <strong>{author}</strong>
             <p>{content}</p>
             <footer>
-                👍 {likes} | 💬 {comments}
+                <button onClick={handleLike}>
+                    {liked ? "❤️" : "🤍"} {likes}
+                </button>
+                {" | "}
+                💬 {commentsCount}
             </footer>
+            <CommentSection postId={id} />
         </article>
     );
 }

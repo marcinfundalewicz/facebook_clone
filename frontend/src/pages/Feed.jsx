@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import CreatePost from "../components/CreatePost";
 import PostCard from "../components/PostCard";
-import { getPosts } from "../api/api.js";
+import { getPosts, createPost } from "../api/api.js";
 
 export default function Feed() {
     const [posts, setPosts] = useState([]);
@@ -19,17 +19,29 @@ export default function Feed() {
         loadPosts();
     }, []);
 
+    async function handleAddPost(content) {
+        try {
+            await createPost(content);
+            const res = await getPosts();
+            setPosts(res.data.content);
+        } catch (err) {
+            console.error("Create post failed", err);
+        }
+    }
+
     return (
         <div>
-            <CreatePost />
+            <CreatePost onAddPost={handleAddPost}/>
 
             {posts.map(post => (
                 <PostCard
                     key={post.id}
+                    id={post.id}
                     author={post.authorUsername}
                     content={post.content}
-                    likes={post.likesCount}
-                    comments={post.commentsCount}
+                    likesCount={post.likesCount}
+                    commentsCount={post.commentsCount}
+                    likedByMe={post.likedByMe}
                 />
             ))}
         </div>
