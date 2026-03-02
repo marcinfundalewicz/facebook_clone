@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { toggleLike } from "../api/api";
+import CommentSection from "./CommentSection";
 
 export default function PostCard({
                                      id,
@@ -40,6 +41,7 @@ export default function PostCard({
                 {" | "}
                 💬 {commentsCount}
             </footer>
+            <CommentSection postId={id} />
         </article>
     );
 }
