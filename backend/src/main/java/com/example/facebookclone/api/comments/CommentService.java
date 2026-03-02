@@ -1,6 +1,7 @@
 package com.example.facebookclone.api.comments;
 
 import com.example.facebookclone.api.comments.dto.CommentCreateRequest;
+import com.example.facebookclone.api.comments.dto.CommentResponse;
 import com.example.facebookclone.domain.comment.Comment;
 import com.example.facebookclone.domain.comment.CommentRepository;
 import com.example.facebookclone.domain.post.Post;
@@ -11,6 +12,7 @@ import com.example.facebookclone.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class CommentService {
@@ -40,5 +42,16 @@ public class CommentService {
             throw new ForbiddenException("You cannot delete this comment");
         }
         commentRepository.save(comment);
+    }
+    public List<CommentResponse> getCommentsForPost(Long postId) {
+        return commentRepository.findByPostIdOrderByCreatedAtAsc(postId)
+                .stream()
+                .map(comment -> new CommentResponse(
+                        comment.getId(),
+                        comment.getContent(),
+                        comment.getAuthor().getUsername(),
+                        comment.getCreatedAt()
+                ))
+                .toList();
     }
 }
