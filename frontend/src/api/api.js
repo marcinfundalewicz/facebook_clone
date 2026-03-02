@@ -18,3 +18,10 @@ export function getFeed(page = 0) {
 export function createPost(content) {
     return client.post("/api/posts", {content});
 }
+export function getComments(postId) {
+    return client.get(`/api/posts/${postId}/comments`);
+}
+
+export function addComment(postId, content) {
+    return client.post(`/api/posts/${postId}/comments`, { content });
+}
