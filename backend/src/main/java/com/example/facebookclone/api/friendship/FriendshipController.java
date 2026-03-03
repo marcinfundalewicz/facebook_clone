@@ -18,8 +18,12 @@ public class FriendshipController {
     @PostMapping("/{userId}")
     public void sendRequest(
             @PathVariable Long userId,
-            @AuthenticationPrincipal User user
+            org.springframework.security.core.Authentication authentication
     ) {
+        if (authentication == null || !(authentication.getPrincipal() instanceof User user)) {
+            throw new RuntimeException("Login required");
+        }
+
         friendshipService.sendRequest(userId, user);
     }
 
@@ -32,7 +36,12 @@ public class FriendshipController {
     }
 
     @GetMapping
-    public List<User> listFriends(@AuthenticationPrincipal User user) {
+    public List<User> listFriends(org.springframework.security.core.Authentication authentication) {
+
+        if (authentication == null || !(authentication.getPrincipal() instanceof User user)) {
+            throw new RuntimeException("Login required");
+        }
+
         return friendshipService.getFriends(user);
     }
 }

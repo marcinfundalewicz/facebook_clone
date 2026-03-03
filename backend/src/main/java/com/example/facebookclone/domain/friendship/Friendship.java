@@ -27,7 +27,7 @@ public class Friendship {
     @Enumerated(EnumType.STRING)
     private FriendshipStatus status;
 
-    private Instant createdAd = Instant.now();
+    private Instant createdAt = Instant.now();
 
     protected Friendship() {}
 
@@ -53,8 +53,8 @@ public class Friendship {
         return status;
     }
 
-    public Instant getCreatedAd() {
-        return createdAd;
+    public Instant getCreatedAt() {
+        return createdAt;
     }
 
     public void accept() {
