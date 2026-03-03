@@ -2,6 +2,7 @@ import {useState, useEffect} from "react";
 import CreatePost from "../components/CreatePost";
 import PostCard from "../components/PostCard";
 import {getPosts, getSocialFeed, createPost} from "../api/api.js";
+import FriendsList from "../components/FriendsList.jsx";
 
 export default function Feed() {
     const [posts, setPosts] = useState([]);
@@ -69,6 +70,7 @@ export default function Feed() {
                 </button>
             </div>
             <CreatePost onAddPost={handleAddPost}/>
+            <FriendsList/>
 
             {posts.map(post => (
                 <PostCard
