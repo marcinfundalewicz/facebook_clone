@@ -12,7 +12,7 @@ export function getFeed(page = 0) {
     return client.get(`/api/posts?page=${page}&size=10`);
 }
 
-    export function toggleLike(postId) {
+export function toggleLike(postId) {
         return client.post(`/api/posts/${postId}/reactions`);
 }
 export function createPost(content) {
@@ -24,4 +24,7 @@ export function getComments(postId) {
 
 export function addComment(postId, content) {
     return client.post(`/api/posts/${postId}/comments`, { content });
+}
+export const getSocialFeed = () => {
+    return client.get("/api/posts/social");
 }

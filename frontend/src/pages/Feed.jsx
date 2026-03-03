@@ -1,17 +1,21 @@
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 import CreatePost from "../components/CreatePost";
 import PostCard from "../components/PostCard";
-import { getPosts, createPost } from "../api/api.js";
+import {getPosts, getSocialFeed, createPost} from "../api/api.js";
 
 export default function Feed() {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [mode, setMode] = useState("all");
 
     useEffect(() => {
         async function loadPosts() {
             try {
                 setLoading(true);
-                const res = await getPosts();
+                const res =
+                    mode === "all"
+                        ? await getPosts()
+                        : await getSocialFeed();
                 setPosts(res.data.content);
             } catch (err) {
                 console.error("Failed to load posts", err);
@@ -33,13 +37,13 @@ export default function Feed() {
         }
     }
 
-    if(loading) {
+    if (loading) {
         return <p>Loading posts...</p>;
     }
 
-    if(!loading && posts.length === 0) {
+    if (!loading && posts.length === 0) {
         return (
-            <div style={{ textAlign: "center", marginTop: "40px" }}>
+            <div style={{textAlign: "center", marginTop: "40px"}}>
                 <h3>No posts yet</h3>
                 <p>Be the first to share something 🚀</p>
             </div>
@@ -48,6 +52,22 @@ export default function Feed() {
 
     return (
         <div>
+            <div style={{marginBottom: "20px"}}>
+                <button
+                    onClick={() => setMode("all")}
+                    disabled={mode === "all"}
+                    style={{marginRight: "10px"}}
+                >
+                    All Posts
+                </button>
+
+                <button
+                    onClick={() => setMode("friends")}
+                    disabled={mode === "friends"}
+                >
+                    Friends Feed
+                </button>
+            </div>
             <CreatePost onAddPost={handleAddPost}/>
 
             {posts.map(post => (
