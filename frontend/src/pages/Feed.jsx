@@ -37,6 +37,15 @@ export default function Feed() {
         return <p>Loading posts...</p>;
     }
 
+    if(!loading && posts.length === 0) {
+        return (
+            <div style={{ textAlign: "center", marginTop: "40px" }}>
+                <h3>No posts yet</h3>
+                <p>Be the first to share something 🚀</p>
+            </div>
+        );
+    }
+
     return (
         <div>
             <CreatePost onAddPost={handleAddPost}/>
