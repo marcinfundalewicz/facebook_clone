@@ -54,38 +54,36 @@ export default function PostCard({
 
     return (
         <article className="post-card">
+
             <div className="post-header">
+
                 <img
                     className="avatar"
                     src={`https://api.dicebear.com/7.x/initials/svg?seed=${author}`}
                     alt={author}
                 />
-                <div className="post-header">
-                    <div className="avatar">
-                        {author.substring(0, 2).toUpperCase()}
-                    </div>
-                    <div>
-                        <strong>{author}</strong>
-                        <div className="time">{timeAgo(createdAt)}</div>
-                    </div>
+
+                <div className="post-user">
+                    <strong>{author}</strong>
+                    <div className="time">{timeAgo(createdAt)}</div>
                 </div>
+
             </div>
 
             <p className="post-content">{content}</p>
 
-            <footer className="post-footer">
-                <div className="post-actions">
-                    <button onClick={handleLike}>
-                        {liked ? "❤️" : "🤍"} {likes}
-                    </button>
+            <div className="post-actions">
 
-                    <div>
-                        💬 {commentsCount}
-                    </div>
-                </div>
-            </footer>
+                <button onClick={handleLike}>
+                    {liked ? "❤️" : "🤍"} {likes}
+                </button>
 
-            <CommentSection postId={id}/>
+                <span>💬 {commentsCount}</span>
+
+            </div>
+
+            <CommentSection postId={id} />
+
         </article>
     );
 }
