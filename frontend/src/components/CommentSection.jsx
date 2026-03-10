@@ -27,7 +27,6 @@ export default function CommentSection({ postId }) {
             authorUsername: "You"
         };
 
-        // optimistic UI
         setComments(prev => [...prev, newComment]);
         setContent("");
 
@@ -38,17 +37,48 @@ export default function CommentSection({ postId }) {
         }
     }
 
-    return (
-        <div className="comment-input">
-            <input
-                value={content}
-                onChange={e => setContent(e.target.value)}
-                placeholder="Write a comment..."
-            />
+    function timeAgo(date) {
+        if (!date) return "";
 
-            <button onClick={handleAddComment}>
-                Comment
-            </button>
+        const seconds = Math.floor((Date.now() - new Date(date)) / 1000);
+        const minutes = Math.floor(seconds / 60);
+        const hours = Math.floor(seconds / 3600);
+
+        if (minutes < 1) return "just now";
+        if (minutes < 60) return minutes + " min ago";
+        if (hours < 24) return hours + " h ago";
+
+        return Math.floor(hours / 24) + " d ago";
+    }
+
+    return (
+        <div className="comments">
+
+            {comments.map(comment => (
+                <div key={comment.id} className="comment">
+
+                    <div className="comment-header">
+                        <strong>{comment.authorUsername}</strong>
+                        <span className="time">{timeAgo(comment.createdAt)}</span>
+                    </div>
+
+                    <div>{comment.content}</div>
+
+                </div>
+            ))}
+
+            <div className="comment-input">
+                <input
+                    value={content}
+                    onChange={e => setContent(e.target.value)}
+                    placeholder="Write a comment..."
+                />
+
+                <button onClick={handleAddComment}>
+                    Comment
+                </button>
+            </div>
+
         </div>
     );
 }

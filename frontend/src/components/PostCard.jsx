@@ -40,16 +40,19 @@ export default function PostCard({
     }
 
     function timeAgo(date) {
-        const seconds = Math.floor((new Date() - new Date(date)) / 1000)
+        if (!date) return "";
 
-        const minutes = Math.floor(seconds / 60)
-        const hours = Math.floor(seconds / 3600)
+        const seconds = Math.floor((new Date() - new Date(date)) / 1000);
+        if (isNaN(seconds)) return "";
 
-        if (minutes < 1) return "just now"
-        if (minutes < 60) return minutes + " min ago"
-        if (hours < 24) return hours + " h ago"
+        const minutes = Math.floor(seconds / 60);
+        const hours = Math.floor(seconds / 3600);
 
-        return Math.floor(hours / 24) + " d ago"
+        if (minutes < 1) return "just now";
+        if (minutes < 60) return minutes + " min ago";
+        if (hours < 24) return hours + " h ago";
+
+        return Math.floor(hours / 24) + " d ago";
     }
 
     return (

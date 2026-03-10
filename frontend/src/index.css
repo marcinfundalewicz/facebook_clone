@@ -126,3 +126,14 @@ button:hover {
     border-radius: 20px;
     padding: 6px 14px;
 }
+
+.comment-header {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.comment-header .time {
+    font-size: 12px;
+    color: #777;
+}
