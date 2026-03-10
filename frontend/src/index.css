@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background: #f5f6f8;
+    background: #f0f2f5;
     margin: 0;
 }
 
@@ -45,4 +45,31 @@ body {
     background: transparent;
     cursor: pointer;
     font-size: 15px;
+}
+
+.create-post {
+    background: white;
+    padding: 16px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.create-post textarea {
+    width: 100%;
+    resize: none;
+    padding: 8px;
+}
+
+button {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: none;
+    background: #1877f2;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
 }
