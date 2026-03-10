@@ -2,83 +2,77 @@ import { useEffect, useState } from "react";
 import { getComments, addComment } from "../api/api";
 
 export default function CommentSection({ postId }) {
-    const [comments, setComments] = useState([]);
-    const [content, setContent] = useState("");
+  const [comments, setComments] = useState([]);
+  const [content, setContent] = useState("");
 
-    useEffect(() => {
-        async function load() {
-            try {
-                const res = await getComments(postId);
-                setComments(res.data);
-            } catch (err) {
-                console.error("Load comments failed", err);
-            }
-        }
-        load();
-    }, [postId]);
-
-    async function handleAddComment(e) {
-        e.preventDefault();
-        if (!content.trim()) return;
-
-        const newComment = {
-            id: Date.now(),
-            content,
-            authorUsername: "You"
-        };
-
-        setComments(prev => [...prev, newComment]);
-        setContent("");
-
-        try {
-            await addComment(postId, content);
-        } catch (err) {
-            console.error("Add comment failed", err);
-        }
+  useEffect(() => {
+    async function load() {
+      try {
+        const res = await getComments(postId);
+        setComments(res.data);
+      } catch (err) {
+        console.error("Load comments failed", err);
+      }
     }
+    load();
+  }, [postId]);
 
-    function timeAgo(date) {
-        if (!date) return "";
+  async function handleAddComment(e) {
+    e.preventDefault();
+    if (!content.trim()) return;
 
-        const seconds = Math.floor((Date.now() - new Date(date)) / 1000);
-        const minutes = Math.floor(seconds / 60);
-        const hours = Math.floor(seconds / 3600);
+    const newComment = {
+      id: Date.now(),
+      content,
+      authorUsername: "You",
+    };
 
-        if (minutes < 1) return "just now";
-        if (minutes < 60) return minutes + " min ago";
-        if (hours < 24) return hours + " h ago";
+    setComments((prev) => [...prev, newComment]);
+    setContent("");
 
-        return Math.floor(hours / 24) + " d ago";
+    try {
+      await addComment(postId, content);
+    } catch (err) {
+      console.error("Add comment failed", err);
     }
+  }
 
-    return (
-        <div className="comments">
+  function timeAgo(date) {
+    if (!date) return "";
 
-            {comments.map(comment => (
-                <div key={comment.id} className="comment">
+    const seconds = Math.floor((Date.now() - new Date(date)) / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(seconds / 3600);
 
-                    <div className="comment-header">
-                        <strong>{comment.authorUsername}</strong>
-                        <span className="time">{timeAgo(comment.createdAt)}</span>
-                    </div>
+    if (minutes < 1) return "just now";
+    if (minutes < 60) return minutes + " min ago";
+    if (hours < 24) return hours + " h ago";
 
-                    <div>{comment.content}</div>
+    return Math.floor(hours / 24) + " d ago";
+  }
 
-                </div>
-            ))}
+  return (
+    <div className="comments">
+      {comments.map((comment) => (
+        <div key={comment.id} className="comment">
+          <div className="comment-header">
+            <strong>{comment.authorUsername}</strong>
+            <span className="time">{timeAgo(comment.createdAt)}</span>
+          </div>
 
-            <div className="comment-input">
-                <input
-                    value={content}
-                    onChange={e => setContent(e.target.value)}
-                    placeholder="Write a comment..."
-                />
-
-                <button onClick={handleAddComment}>
-                    Comment
-                </button>
-            </div>
-
+          <div>{comment.content}</div>
         </div>
-    );
+      ))}
+
+      <div className="comment-input">
+        <input
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          placeholder="Write a comment..."
+        />
+
+        <button onClick={handleAddComment}>Comment</button>
+      </div>
+    </div>
+  );
 }
