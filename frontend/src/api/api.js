@@ -1,40 +1,39 @@
 import client from "./client";
 
 export function login(email, password) {
-    return client.post("/api/auth/login", { email, password });
+  return client.post("/api/auth/login", { email, password });
 }
 
 export function getPosts() {
-    return client.get("/api/posts");
+  return client.get("/api/posts");
 }
 
 export function getFeed(page = 0) {
-    return client.get(`/api/posts?page=${page}&size=10`);
+  return client.get(`/api/posts?page=${page}&size=10`);
 }
 
 export function toggleLike(postId) {
-        return client.post(`/api/posts/${postId}/reactions`);
+  return client.post(`/api/posts/${postId}/reactions`);
 }
 export function createPost(content) {
-    return client.post("/api/posts", {content});
+  return client.post("/api/posts", { content });
 }
 export function getComments(postId) {
-    return client.get(`/api/posts/${postId}/comments`);
+  return client.get(`/api/posts/${postId}/comments`);
 }
 
 export function addComment(postId, content) {
-    return client.post(`/api/posts/${postId}/comments`, { content });
+  return client.post(`/api/posts/${postId}/comments`, { content });
 }
 export const getSocialFeed = () => {
-    return client.get("/api/posts/social");
-}
+  return client.get("/api/posts/social");
+};
 export const getFriend = () => {
-    return client.get("/api/friends");
-}
+  return client.get("/api/friends");
+};
 export const removeFriend = (id) => {
-    return client.delete(`/api/friends/${id}`);
-}
+  return client.delete(`/api/friends/${id}`);
+};
 export const getUsers = () => client.get("/api/users");
 export const getFriends = () => client.get("/api/friends");
-export const addFriend = (userId) =>
-    client.post(`/api/friends/${userId}`);
+export const addFriend = (userId) => client.post(`/api/friends/${userId}`);
