@@ -39,21 +39,16 @@ export default function CommentSection({ postId }) {
     }
 
     return (
-        <div style={{ marginTop: "10px" }}>
-            {comments.map(c => (
-                <div key={c.id}>
-                    <strong>{c.authorUsername}</strong>: {c.content}
-                </div>
-            ))}
+        <div className="comment-input">
+            <input
+                value={content}
+                onChange={e => setContent(e.target.value)}
+                placeholder="Write a comment..."
+            />
 
-            <form onSubmit={handleAddComment}>
-                <input
-                    value={content}
-                    onChange={e => setContent(e.target.value)}
-                    placeholder="Write a comment..."
-                />
-                <button type="submit">Comment</button>
-            </form>
+            <button onClick={handleAddComment}>
+                Comment
+            </button>
         </div>
     );
 }
