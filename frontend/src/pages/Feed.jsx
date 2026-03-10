@@ -52,25 +52,8 @@ export default function Feed() {
     }
 
     return (
-        <div>
-            <div style={{marginBottom: "20px"}}>
-                <button
-                    onClick={() => setMode("all")}
-                    disabled={mode === "all"}
-                    style={{marginRight: "10px"}}
-                >
-                    All Posts
-                </button>
-
-                <button
-                    onClick={() => setMode("friends")}
-                    disabled={mode === "friends"}
-                >
-                    Friends Feed
-                </button>
-            </div>
+        <div className="feed-container">
             <CreatePost onAddPost={handleAddPost}/>
-            <FriendsList/>
 
             {posts.map(post => (
                 <PostCard

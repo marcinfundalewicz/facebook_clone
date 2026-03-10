@@ -1,0 +1,48 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f6f8;
+    margin: 0;
+}
+
+.feed-container {
+    max-width: 600px;
+    margin: 40px auto;
+}
+
+.post-card {
+    background: white;
+    padding: 16px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.post-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+}
+
+.post-content {
+    margin-bottom: 10px;
+}
+
+.post-footer {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.post-footer button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 15px;
+}
