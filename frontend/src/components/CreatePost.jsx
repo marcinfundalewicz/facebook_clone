@@ -2,14 +2,19 @@ import { useState } from "react";
 
 export default function CreatePost({ onAddPost }) {
   const [text, setText] = useState("");
+  const [posting, setPosting] = useState(false);
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-
     if (!text.trim()) return;
 
-    onAddPost(text);
-    setText("");
+    try {
+      setPosting(true);
+      await onAddPost(text);
+      setText("");
+    } finally {
+      setPosting(false);
+    }
   }
 
   return (
@@ -19,7 +24,9 @@ export default function CreatePost({ onAddPost }) {
         onChange={(e) => setText(e.target.value)}
         placeholder="What's on your mind?"
       />
-      <button type="submit">Post</button>
+      <button type="submit" disabled={posting}>
+        {posting ? "Posting..." : "Post"}
+      </button>
     </form>
   );
 }
