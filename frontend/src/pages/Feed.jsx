@@ -22,7 +22,7 @@ export default function Feed() {
     }
 
     loadPosts();
-  }, []);
+  }, [mode]);
 
   async function handleAddPost(content) {
     try {
@@ -35,7 +35,11 @@ export default function Feed() {
   }
 
   if (loading) {
-    return <p>Loading posts...</p>;
+    return (
+      <div className="feed-container">
+        <p style={{ textAlign: "center" }}>Loading posts...</p>
+      </div>
+    );
   }
 
   if (!loading && posts.length === 0) {
