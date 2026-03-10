@@ -4,6 +4,7 @@ import { getComments, addComment } from "../api/api";
 export default function CommentSection({ postId }) {
   const [comments, setComments] = useState([]);
   const [content, setContent] = useState("");
+  const [sending, setSending] = useState(false);
 
   useEffect(() => {
     async function load() {
@@ -31,9 +32,12 @@ export default function CommentSection({ postId }) {
     setContent("");
 
     try {
+      setSending(true);
       await addComment(postId, content);
     } catch (err) {
       console.error("Add comment failed", err);
+    } finally {
+      setSending(false);
     }
   }
 
@@ -71,7 +75,9 @@ export default function CommentSection({ postId }) {
           placeholder="Write a comment..."
         />
 
-        <button onClick={handleAddComment}>Comment</button>
+        <button onClick={handleAddComment} disabled={sending}>
+          {sending ? "Sending..." : "Comment"}
+        </button>
       </div>
     </div>
   );
