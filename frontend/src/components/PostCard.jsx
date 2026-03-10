@@ -8,7 +8,8 @@ export default function PostCard({
                                      content,
                                      likesCount,
                                      commentsCount,
-                                     likedByMe
+                                     likedByMe,
+                                     createdAt
                                  }) {
     const [likes, setLikes] = useState(likesCount ?? 0);
     const [liked, setLiked] = useState(likedByMe ?? false);
@@ -38,6 +39,19 @@ export default function PostCard({
         }
     }
 
+    function timeAgo(date) {
+        const seconds = Math.floor((new Date() - new Date(date)) / 1000)
+
+        const minutes = Math.floor(seconds / 60)
+        const hours = Math.floor(seconds / 3600)
+
+        if (minutes < 1) return "just now"
+        if (minutes < 60) return minutes + " min ago"
+        if (hours < 24) return hours + " h ago"
+
+        return Math.floor(hours / 24) + " d ago"
+    }
+
     return (
         <article className="post-card">
             <div className="post-header">
@@ -46,7 +60,15 @@ export default function PostCard({
                     src={`https://api.dicebear.com/7.x/initials/svg?seed=${author}`}
                     alt={author}
                 />
-                <strong>{author}</strong>
+                <div className="post-header">
+                    <div className="avatar">
+                        {author.substring(0, 2).toUpperCase()}
+                    </div>
+                    <div>
+                        <strong>{author}</strong>
+                        <div className="time">{timeAgo(createdAt)}</div>
+                    </div>
+                </div>
             </div>
 
             <p className="post-content">{content}</p>
