@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import CreatePost from "../components/CreatePost";
 import PostCard from "../components/PostCard";
 import { getPosts, getSocialFeed, createPost } from "../api/api.js";
+import Toast from "../components/Toast";
 
 export default function Feed() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [mode] = useState("all");
+  const [toast, setToast] = useState(null);
 
   useEffect(() => {
     async function loadPosts() {
@@ -29,6 +31,8 @@ export default function Feed() {
       await createPost(content);
       const res = await getPosts();
       setPosts(res.data.content);
+
+      setToast("Post created ✅");
     } catch (err) {
       console.error("Create post failed", err);
     }
@@ -76,6 +80,8 @@ export default function Feed() {
           likedByMe={post.likedByMe}
         />
       ))}
+
+      {toast && <Toast message={toast} onClose={() => setToast(null)} />}
     </div>
   );
 }
