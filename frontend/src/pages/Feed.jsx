@@ -70,23 +70,39 @@ export default function Feed() {
   }
 
   return (
-    <div className="feed-container">
-      <CreatePost onAddPost={handleAddPost} />
+    <div className="layout">
+      <div className="sidebar">
+        <div className="sidebar-item">🏠 Home</div>
+        <div className="sidebar-item">👥 Friends</div>
+        <div className="sidebar-item">📝 My Posts</div>
+        <div className="sidebar-item">⚙ Settings</div>
+      </div>
 
-      {posts.map((post) => (
-        <PostCard
-          key={post.id}
-          id={post.id}
-          author={post.authorUsername}
-          content={post.content}
-          likesCount={post.likesCount}
-          commentsCount={post.commentsCount}
-          likedByMe={post.likedByMe}
-          createdAt={post.createdAt}
-        />
-      ))}
+      <div className="feed-container">
+        <CreatePost onAddPost={handleAddPost} />
 
-      {toast && <Toast message={toast} onClose={() => setToast(null)} />}
+        {posts.map((post) => (
+          <PostCard
+            key={post.id}
+            id={post.id}
+            author={post.authorUsername}
+            content={post.content}
+            likesCount={post.likesCount}
+            commentsCount={post.commentsCount}
+            likedByMe={post.likedByMe}
+            createdAt={post.createdAt}
+          />
+        ))}
+      </div>
+
+      <div className="right-panel">
+        <div className="sidebar">
+          <h4>Suggestions</h4>
+          <div className="sidebar-item">John</div>
+          <div className="sidebar-item">Anna</div>
+          <div className="sidebar-item">Michael</div>
+        </div>
+      </div>
     </div>
   );
 }
