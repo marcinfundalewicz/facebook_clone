@@ -11,18 +11,17 @@ body {
 
 .post-card {
   background: white;
-  padding: 16px;
-  border-radius: 10px;
-  margin-bottom: 16px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  transition:
-    transform 0.15s ease,
-    box-shadow 0.15s ease;
+  padding: 22px;
+  border-radius: 14px;
+  margin-bottom: 22px;
+
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .post-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.15);
 }
 
 .post-header {
@@ -33,9 +32,15 @@ body {
 }
 
 .avatar {
-  width: 40px;
-  height: 40px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: bold;
 }
 
 .post-content {
@@ -44,9 +49,23 @@ body {
 
 .post-actions {
   display: flex;
-  gap: 16px;
-  margin-top: 6px;
+  gap: 18px;
+  margin-top: 12px;
+}
+
+.post-actions button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+
+  padding: 6px 10px;
+  border-radius: 8px;
+
   font-size: 14px;
+}
+
+.post-actions button:hover {
+  background: #f0f2f5;
 }
 
 .time {
@@ -146,4 +165,9 @@ button:hover {
 
 .nav-links button:hover {
   background: #f0f2f5;
+}
+
+.post-user {
+  display: flex;
+  flex-direction: column;
 }
