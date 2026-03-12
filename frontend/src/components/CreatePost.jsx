@@ -20,7 +20,7 @@ export default function CreatePost({ onAddPost }) {
   return (
     <div className="create-post">
       <div className="create-post-header">
-        <div className="avatar">U</div>
+        <div className="avatar">YO</div>
 
         <textarea
           value={text}
@@ -29,7 +29,7 @@ export default function CreatePost({ onAddPost }) {
         />
       </div>
 
-      <button type="submit" disabled={posting}>
+      <button className="primary" onClick={handleSubmit} disabled={posting}>
         {posting ? "Posting..." : "Post"}
       </button>
     </div>

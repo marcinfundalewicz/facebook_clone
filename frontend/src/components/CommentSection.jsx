@@ -74,13 +74,19 @@ export default function CommentSection({ postId }) {
       ))}
 
       <div className="comment-input">
+        <div className="avatar small">YO</div>
+
         <input
           value={content}
           onChange={(e) => setContent(e.target.value)}
           placeholder="Write a comment..."
         />
 
-        <button onClick={handleAddComment} disabled={sending}>
+        <button
+          className="primary"
+          onClick={handleAddComment}
+          disabled={sending}
+        >
           {sending ? "Sending..." : "Comment"}
         </button>
       </div>
