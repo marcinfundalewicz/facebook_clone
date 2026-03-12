@@ -103,7 +103,14 @@ button:hover {
 .comment {
   display: flex;
   gap: 8px;
-  margin-top: 8px;
+  margin-top: 10px;
+}
+
+.comment-bubble {
+  background: #f0f2f5;
+  padding: 8px 12px;
+  border-radius: 16px;
+  font-size: 14px;
 }
 
 .comment:last-child {
@@ -188,4 +195,10 @@ button:hover {
   font-size: 13px;
   color: #666;
   margin-top: 6px;
+}
+
+.comment-time {
+  font-size: 11px;
+  color: #777;
+  margin-top: 3px;
 }

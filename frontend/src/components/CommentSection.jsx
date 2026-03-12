@@ -26,6 +26,7 @@ export default function CommentSection({ postId }) {
       id: Date.now(),
       content,
       authorUsername: "You",
+      createdAt: new Date(),
     };
 
     setComments((prev) => [...prev, newComment]);
@@ -57,14 +58,18 @@ export default function CommentSection({ postId }) {
 
   return (
     <div className="comments">
-      {comments.map((comment) => (
-        <div key={comment.id} className="comment">
-          <div className="comment-header">
-            <strong>{comment.authorUsername}</strong>
-            <span className="time">{timeAgo(comment.createdAt)}</span>
+      {comments.map((c) => (
+        <div className="comment" key={c.id}>
+          <div className="avatar">
+            {c.authorUsername.substring(0, 2).toUpperCase()}
           </div>
 
-          <div>{comment.content}</div>
+          <div className="comment-bubble">
+            <strong>{c.authorUsername}</strong>
+            <div>{c.content}</div>
+
+            <div className="comment-time">{timeAgo(c.createdAt)}</div>
+          </div>
         </div>
       ))}
 
