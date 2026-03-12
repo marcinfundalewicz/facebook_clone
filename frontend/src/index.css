@@ -81,27 +81,6 @@ button:hover {
   opacity: 0.9;
 }
 
-.navbar {
-  height: 60px;
-  background: white;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-}
-
-.logo {
-  font-weight: bold;
-  font-size: 18px;
-  color: #1877f2;
-}
-
-.nav-links button {
-  margin-left: 10px;
-}
-
 .comment {
   padding: 6px 0;
   border-bottom: 1px solid #eee;
@@ -138,4 +117,33 @@ button:hover {
 .comment-header .time {
   font-size: 12px;
   color: #777;
+}
+
+.navbar {
+  height: 60px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 20px;
+
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  margin-bottom: 30px;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 20px;
+  color: #1877f2;
+}
+
+.nav-links button {
+  margin-left: 10px;
+  background: transparent;
+  color: #333;
+}
+
+.nav-links button:hover {
+  background: #f0f2f5;
 }
