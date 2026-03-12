@@ -232,3 +232,9 @@ button:hover {
   font-size: 15px;
   outline: none;
 }
+
+.post-stats {
+  font-size: 13px;
+  color: #666;
+  margin-top: 6px;
+}
