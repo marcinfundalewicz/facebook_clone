@@ -2,20 +2,20 @@ import { useAuth } from "./auth/AuthContext";
 import Feed from "./pages/Feed";
 import Login from "./pages/Login.jsx";
 import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
 
 export default function App() {
-  const { token } = useAuth();
+  const { token, logout } = useAuth();
   if (!token) return <Login />;
   return (
     <>
-      <Navbar
-        onLogout={() => {
-          localStorage.removeItem("token");
-          window.location.reload();
-        }}
-      />
+      <Navbar onLogout={logout} />
 
-      <Feed />
+      <div className="layout">
+        <Sidebar />
+
+        <Feed />
+      </div>
     </>
   );
 }

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../auth/AuthContext";
-import { login as loginRequest } from "../api/api.js";
+import { login as loginApi } from "../api/api";
 
 export default function Login() {
   const { login } = useAuth();
@@ -10,31 +10,38 @@ export default function Login() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
     try {
-      const res = await loginRequest(email, password);
-      login(res.data.token);
+      const res = await loginApi(email, password);
+
+      login(res.data.token); // ← zapisujemy JWT
     } catch (error) {
-      console.error(error);
       alert("Login failed");
     }
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        placeholder="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
+    <div className="login-page">
+      <form className="login-card" onSubmit={handleSubmit}>
+        <h1>FacebookClone</h1>
 
-      <input
-        type="password"
-        placeholder="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
+        <input
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
 
-      <button>Login</button>
-    </form>
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <button className="primary" type="submit">
+          Login
+        </button>
+      </form>
+    </div>
   );
 }

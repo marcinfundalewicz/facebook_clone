@@ -2,11 +2,14 @@ import { useState, useEffect } from "react";
 import CreatePost from "../components/CreatePost";
 import PostCard from "../components/PostCard";
 import { getPosts, getSocialFeed, createPost } from "../api/api.js";
+import Toast from "../components/Toast";
 
 export default function Feed() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [mode] = useState("all");
+  const [toast, setToast] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function loadPosts() {
@@ -16,6 +19,7 @@ export default function Feed() {
         setPosts(res.data.content);
       } catch (err) {
         console.error("Failed to load posts", err);
+        setError("Failed to load feed");
       } finally {
         setLoading(false);
       }
@@ -29,15 +33,29 @@ export default function Feed() {
       await createPost(content);
       const res = await getPosts();
       setPosts(res.data.content);
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
+      setToast("Post created ✅");
     } catch (err) {
       console.error("Create post failed", err);
     }
   }
 
-  if (loading) {
+  if (error) {
     return (
       <div className="feed-container">
-        <p style={{ textAlign: "center" }}>Loading posts...</p>
+        {[1, 2, 3].map((i) => (
+          <div className="skeleton-post" key={i}>
+            <div style={{ display: "flex", gap: "10px" }}>
+              <div className="skeleton skeleton-avatar"></div>
+              <div style={{ flex: 1 }}>
+                <div className="skeleton skeleton-line"></div>
+                <div className="skeleton skeleton-line"></div>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     );
   }
@@ -52,20 +70,39 @@ export default function Feed() {
   }
 
   return (
-    <div className="feed-container">
-      <CreatePost onAddPost={handleAddPost} />
+    <div className="layout">
+      <div className="sidebar">
+        <div className="sidebar-item">🏠 Home</div>
+        <div className="sidebar-item">👥 Friends</div>
+        <div className="sidebar-item">📝 My Posts</div>
+        <div className="sidebar-item">⚙ Settings</div>
+      </div>
 
-      {posts.map((post) => (
-        <PostCard
-          key={post.id}
-          id={post.id}
-          author={post.authorUsername}
-          content={post.content}
-          likesCount={post.likesCount}
-          commentsCount={post.commentsCount}
-          likedByMe={post.likedByMe}
-        />
-      ))}
+      <div className="feed-container">
+        <CreatePost onAddPost={handleAddPost} />
+
+        {posts.map((post) => (
+          <PostCard
+            key={post.id}
+            id={post.id}
+            author={post.authorUsername}
+            content={post.content}
+            likesCount={post.likesCount}
+            commentsCount={post.commentsCount}
+            likedByMe={post.likedByMe}
+            createdAt={post.createdAt}
+          />
+        ))}
+      </div>
+
+      <div className="right-panel">
+        <div className="sidebar">
+          <h4>Suggestions</h4>
+          <div className="sidebar-item">John</div>
+          <div className="sidebar-item">Anna</div>
+          <div className="sidebar-item">Michael</div>
+        </div>
+      </div>
     </div>
   );
 }

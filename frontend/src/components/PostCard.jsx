@@ -33,7 +33,6 @@ export default function PostCard({
       await toggleLike(id);
     } catch (err) {
       console.error("Like failed", err);
-
       setLiked(liked);
       setLikes(likes);
     }
@@ -72,12 +71,19 @@ export default function PostCard({
 
       <p className="post-content">{content}</p>
 
+      <div className="post-stats">
+        ❤️ {likes} · 💬 {commentsCount}
+      </div>
+
       <div className="post-actions">
-        <button onClick={handleLike}>
-          {liked ? "❤️" : "🤍"} {likes}
+        <button
+          onClick={handleLike}
+          className={`like-button ${liked ? "liked" : ""}`}
+        >
+          {liked ? "❤️ Liked" : "🤍 Like"}
         </button>
 
-        <span>💬 {commentsCount}</span>
+        <button>💬 Comment</button>
       </div>
 
       <CommentSection postId={id} />
