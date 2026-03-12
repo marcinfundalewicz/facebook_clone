@@ -18,15 +18,20 @@ export default function CreatePost({ onAddPost }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <textarea
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        placeholder="What's on your mind?"
-      />
+    <div className="create-post">
+      <div className="create-post-header">
+        <div className="avatar">U</div>
+
+        <textarea
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder="What's on your mind?"
+        />
+      </div>
+
       <button type="submit" disabled={posting}>
         {posting ? "Posting..." : "Post"}
       </button>
-    </form>
+    </div>
   );
 }
