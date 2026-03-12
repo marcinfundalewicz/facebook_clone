@@ -1,18 +1,25 @@
+import { useAuth } from "../auth/AuthContext";
+
 export default function Navbar({ onLogout }) {
-  function toggleDarkMode() {
-    document.body.classList.toggle("dark");
-  }
+  const { token } = useAuth();
+
+  const username = "testuser"; // na razie prosto
+
+  const initials = username.substring(0, 2).toUpperCase();
 
   return (
     <div className="navbar">
       <div className="logo">FacebookClone</div>
 
-      <div className="nav-links">
-        <button onClick={toggleDarkMode}>🌙</button>
+      <div className="nav-right">
+        <div className="user-badge">
+          <div className="avatar small">{initials}</div>
+          <span className="username">{username}</span>
+        </div>
 
-        <div className="avatar small">YO</div>
-
-        <button onClick={onLogout}>Logout</button>
+        <button className="logout-btn" onClick={onLogout}>
+          Logout
+        </button>
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ export default function Feed() {
   const [loading, setLoading] = useState(true);
   const [mode] = useState("all");
   const [toast, setToast] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function loadPosts() {
@@ -18,6 +19,7 @@ export default function Feed() {
         setPosts(res.data.content);
       } catch (err) {
         console.error("Failed to load posts", err);
+        setError("Failed to load feed");
       } finally {
         setLoading(false);
       }
@@ -32,13 +34,15 @@ export default function Feed() {
       const res = await getPosts();
       setPosts(res.data.content);
 
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
       setToast("Post created ✅");
     } catch (err) {
       console.error("Create post failed", err);
     }
   }
 
-  if (loading) {
+  if (error) {
     return (
       <div className="feed-container">
         {[1, 2, 3].map((i) => (
@@ -78,6 +82,7 @@ export default function Feed() {
           likesCount={post.likesCount}
           commentsCount={post.commentsCount}
           likedByMe={post.likedByMe}
+          createdAt={post.createdAt}
         />
       ))}
 
