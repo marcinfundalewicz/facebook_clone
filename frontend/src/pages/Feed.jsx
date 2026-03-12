@@ -37,7 +37,17 @@ export default function Feed() {
   if (loading) {
     return (
       <div className="feed-container">
-        <p style={{ textAlign: "center" }}>Loading posts...</p>
+        {[1, 2, 3].map((i) => (
+          <div className="skeleton-post" key={i}>
+            <div style={{ display: "flex", gap: "10px" }}>
+              <div className="skeleton skeleton-avatar"></div>
+              <div style={{ flex: 1 }}>
+                <div className="skeleton skeleton-line"></div>
+                <div className="skeleton skeleton-line"></div>
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     );
   }

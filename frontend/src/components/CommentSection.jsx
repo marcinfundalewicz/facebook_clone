@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { getComments, addComment } from "../api/api";
 
 export default function CommentSection({ postId }) {
   const [comments, setComments] = useState([]);
   const [content, setContent] = useState("");
   const [sending, setSending] = useState(false);
+  const bottomRef = useRef(null);
 
   useEffect(() => {
     async function load() {
@@ -17,6 +18,10 @@ export default function CommentSection({ postId }) {
     }
     load();
   }, [postId]);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [comments]);
 
   async function handleAddComment(e) {
     e.preventDefault();
@@ -73,12 +78,19 @@ export default function CommentSection({ postId }) {
         </div>
       ))}
 
+      <div ref={bottomRef}></div>
+
       <div className="comment-input">
         <div className="avatar small">YO</div>
 
         <input
           value={content}
           onChange={(e) => setContent(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleAddComment(e);
+            }
+          }}
           placeholder="Write a comment..."
         />
 
