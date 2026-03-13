@@ -28,9 +28,7 @@ export function addComment(postId, content) {
 export const getSocialFeed = () => {
   return client.get("/api/posts/social");
 };
-export const getFriend = () => {
-  return client.get("/api/friends");
-};
+
 export const removeFriend = (id) => {
   return client.delete(`/api/friends/${id}`);
 };
