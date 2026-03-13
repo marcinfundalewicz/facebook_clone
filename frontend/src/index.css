@@ -231,12 +231,12 @@ button.primary:hover {
 }
 
 /* NAVBAR */
-
 .navbar {
   position: sticky;
-  width: 100%;
   top: 0;
   z-index: 100;
+
+  width: 100%;
 
   height: 64px;
   background: white;
@@ -245,7 +245,7 @@ button.primary:hover {
   align-items: center;
   justify-content: space-between;
 
-  padding: 0 40px;
+  padding: 0 30px;
 
   box-shadow: 0 2px 12px rgba(0,0,0,0.08);
 }
@@ -558,12 +558,10 @@ body.dark .search-item:hover {
 
 .layout {
   display: grid;
+  grid-template-columns: 220px 1fr 260px;
+  gap: 30px;
 
-  grid-template-columns: 260px 1fr 260px;
-
-  gap: 40px;
-
-  max-width: 1300px;
+  max-width: 1200px;
   margin: 30px auto;
 }
 
@@ -940,4 +938,10 @@ body.dark .login-card input {
   background: #3a3b3c;
   color: white;
   border: none;
+}
+
+.feed {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }

@@ -101,9 +101,6 @@ export default function Feed() {
 
       {/* RIGHT PANEL */}
       <RightPanel />
-      <div className="sidebar-item">John</div>
-      <div className="sidebar-item">Anna</div>
-      <div className="sidebar-item">Michael</div>
 
       {/* TOAST */}
       {toast && <Toast message={toast} onClose={() => setToast(null)} />}
