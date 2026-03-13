@@ -749,3 +749,88 @@ body.dark .sidebar-item:hover {
 body.dark .sidebar-item:hover {
   background: #3a3b3c;
 }
+
+.post {
+  display: flex;
+  gap: 14px;
+
+  background: white;
+
+  padding: 18px;
+
+  border-radius: 16px;
+
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.post-avatar {
+  width: 42px;
+  height: 42px;
+
+  border-radius: 50%;
+
+  background: #e4e6eb;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: bold;
+}
+
+.post-body {
+  flex: 1;
+}
+
+.post-header {
+  display: flex;
+  gap: 8px;
+
+  font-size: 14px;
+
+  margin-bottom: 6px;
+}
+
+.post-user {
+  font-weight: 600;
+}
+
+.post-time {
+  color: #777;
+  font-size: 12px;
+}
+
+.post-content {
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.post-actions {
+  display: flex;
+  gap: 16px;
+}
+
+.post-actions button {
+  background: transparent;
+  border: none;
+
+  cursor: pointer;
+
+  padding: 6px;
+
+  border-radius: 8px;
+
+  font-size: 14px;
+}
+
+.post-actions button:hover {
+  background: #f0f2f5;
+}
+
+body.dark .post {
+  background: #242526;
+}
+
+body.dark .post-actions button:hover {
+  background: #3a3b3c;
+}

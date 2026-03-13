@@ -41,52 +41,39 @@ export default function PostCard({
   function timeAgo(date) {
     if (!date) return "";
 
-    const seconds = Math.floor((new Date() - new Date(date)) / 1000);
-    if (isNaN(seconds)) return "";
-
+    const seconds = Math.floor((Date.now() - new Date(date)) / 1000);
     const minutes = Math.floor(seconds / 60);
     const hours = Math.floor(seconds / 3600);
 
     if (minutes < 1) return "just now";
-    if (minutes < 60) return minutes + " min ago";
-    if (hours < 24) return hours + " h ago";
+    if (minutes < 60) return minutes + "m";
+    if (hours < 24) return hours + "h";
 
-    return Math.floor(hours / 24) + " d ago";
+    return Math.floor(hours / 24) + "d";
   }
 
   return (
-    <article className="post-card">
-      <div className="post-header">
-        <img
-          className="avatar"
-          src={`https://api.dicebear.com/7.x/initials/svg?seed=${author}`}
-          alt={author}
-        />
+    <div className="post">
+      <div className="post-avatar">{author.substring(0, 2).toUpperCase()}</div>
 
-        <div className="post-user">
-          <strong>{author}</strong>
-          <div className="time">{timeAgo(createdAt)}</div>
+      <div className="post-body">
+        <div className="post-header">
+          <span className="post-user">{author}</span>
+          <span className="post-time">{timeAgo(createdAt)}</span>
         </div>
+
+        <div className="post-content">{content}</div>
+
+        <div className="post-actions">
+          <button onClick={handleLike}>
+            {liked ? "❤️" : "🤍"} {likes}
+          </button>
+
+          <button>💬 {commentsCount}</button>
+        </div>
+
+        <CommentSection postId={id} />
       </div>
-
-      <p className="post-content">{content}</p>
-
-      <div className="post-stats">
-        ❤️ {likes} · 💬 {commentsCount}
-      </div>
-
-      <div className="post-actions">
-        <button
-          onClick={handleLike}
-          className={`like-button ${liked ? "liked" : ""}`}
-        >
-          {liked ? "❤️ Liked" : "🤍 Like"}
-        </button>
-
-        <button>💬 Comment</button>
-      </div>
-
-      <CommentSection postId={id} />
-    </article>
+    </div>
   );
 }
