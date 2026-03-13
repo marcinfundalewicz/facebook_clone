@@ -629,3 +629,83 @@ body.dark .search-item:hover {
 body.dark .mode-toggle:hover {
   background: #3a3b3c;
 }
+
+.layout {
+  display: grid;
+
+  grid-template-columns: 250px 1fr 300px;
+
+  gap: 30px;
+
+  max-width: 1300px;
+  margin: 30px auto;
+}
+
+/* FEED */
+
+.feed {
+  max-width: 650px;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+  background: white;
+
+  padding: 20px;
+
+  border-radius: 16px;
+
+  height: fit-content;
+
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.sidebar-item {
+  padding: 10px 12px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  margin-bottom: 6px;
+
+  transition: background 0.15s ease;
+}
+
+.sidebar-item:hover {
+  background: #f0f2f5;
+}
+
+/* RIGHT PANEL */
+
+.right-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.right-card {
+  background: white;
+
+  padding: 20px;
+
+  border-radius: 16px;
+
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+body.dark .sidebar,
+body.dark .right-card {
+  background: #242526;
+  color: white;
+}
+
+body.dark .sidebar-item:hover {
+  background: #3a3b3c;
+}

@@ -71,6 +71,7 @@ export default function Feed() {
 
   return (
     <div className="layout">
+      {/* LEFT SIDEBAR */}
       <div className="sidebar">
         <div className="sidebar-item">🏠 Home</div>
         <div className="sidebar-item">👥 Friends</div>
@@ -78,7 +79,8 @@ export default function Feed() {
         <div className="sidebar-item">⚙ Settings</div>
       </div>
 
-      <div className="feed-container">
+      {/* FEED */}
+      <div className="feed">
         <CreatePost onAddPost={handleAddPost} />
 
         {posts.map((post) => (
@@ -95,8 +97,9 @@ export default function Feed() {
         ))}
       </div>
 
+      {/* RIGHT PANEL */}
       <div className="right-panel">
-        <div className="sidebar">
+        <div className="right-card">
           <h4>Suggestions</h4>
           <div className="sidebar-item">John</div>
           <div className="sidebar-item">Anna</div>
