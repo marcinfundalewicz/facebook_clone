@@ -4,6 +4,7 @@ import PostCard from "../components/PostCard";
 import { getPosts, getSocialFeed, createPost } from "../api/api.js";
 import Toast from "../components/Toast";
 import Sidebar from "../components/Sidebar";
+import RightPanel from "../components/RightPanel";
 
 export default function Feed() {
   const [posts, setPosts] = useState([]);
@@ -99,14 +100,10 @@ export default function Feed() {
       </div>
 
       {/* RIGHT PANEL */}
-      <div className="right-panel">
-        <div className="right-card">
-          <h4>Who to follow</h4>
-          <div className="sidebar-item">John</div>
-          <div className="sidebar-item">Anna</div>
-          <div className="sidebar-item">Michael</div>
-        </div>
-      </div>
+      <RightPanel />
+      <div className="sidebar-item">John</div>
+      <div className="sidebar-item">Anna</div>
+      <div className="sidebar-item">Michael</div>
 
       {/* TOAST */}
       {toast && <Toast message={toast} onClose={() => setToast(null)} />}

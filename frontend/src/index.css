@@ -834,3 +834,47 @@ body.dark .post {
 body.dark .post-actions button:hover {
   background: #3a3b3c;
 }
+
+.right-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.right-card {
+  background: white;
+
+  padding: 18px;
+
+  border-radius: 16px;
+
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.follow-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  margin-top: 10px;
+
+  font-size: 14px;
+}
+
+.trend-item {
+  margin-top: 10px;
+
+  cursor: pointer;
+
+  font-size: 14px;
+
+  color: #1877f2;
+}
+
+.trend-item:hover {
+  text-decoration: underline;
+}
+
+body.dark .right-card {
+  background: #242526;
+}
