@@ -1,23 +1,22 @@
 export default function RightPanel() {
+  const users = ["John", "Anna", "Michael"];
+
   return (
     <div className="right-panel">
       <div className="right-card">
         <h4>Who to follow</h4>
 
-        <div className="follow-item">
-          <div className="avatar small">JO</div>
-          <span>John</span>
-        </div>
+        {users.map((user) => (
+          <div className="follow-item" key={user}>
+            <img
+              className="avatar small"
+              src={`https://api.dicebear.com/7.x/initials/svg?seed=${user}`}
+              alt={user}
+            />
 
-        <div className="follow-item">
-          <div className="avatar small">AN</div>
-          <span>Anna</span>
-        </div>
-
-        <div className="follow-item">
-          <div className="avatar small">MI</div>
-          <span>Michael</span>
-        </div>
+            <span>{user}</span>
+          </div>
+        ))}
       </div>
 
       <div className="right-card">

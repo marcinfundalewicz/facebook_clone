@@ -53,27 +53,38 @@ export default function PostCard({
   }
 
   return (
-    <div className="post">
-      <div className="post-avatar">{author.substring(0, 2).toUpperCase()}</div>
+    <div className="post-card">
+      {/* HEADER */}
+      <div className="post-header">
+        <img
+          className="avatar"
+          src={`https://api.dicebear.com/7.x/initials/svg?seed=${author}`}
+          alt={author}
+        />
 
-      <div className="post-body">
-        <div className="post-header">
-          <span className="post-user">{author}</span>
-          <span className="post-time">{timeAgo(createdAt)}</span>
+        <div className="post-user-info">
+          <div className="post-user">{author}</div>
+          <div className="time">{timeAgo(createdAt)}</div>
         </div>
-
-        <div className="post-content">{content}</div>
-
-        <div className="post-actions">
-          <button onClick={handleLike}>
-            {liked ? "❤️" : "🤍"} {likes}
-          </button>
-
-          <button>💬 {commentsCount}</button>
-        </div>
-
-        <CommentSection postId={id} />
       </div>
+
+      {/* CONTENT */}
+      <div className="post-content">{content}</div>
+
+      {/* ACTIONS */}
+      <div className="post-actions">
+        <button
+          onClick={handleLike}
+          className={`like-button ${liked ? "liked" : ""}`}
+        >
+          {liked ? "❤️" : "🤍"} {likes}
+        </button>
+
+        <button>💬 {commentsCount}</button>
+      </div>
+
+      {/* COMMENTS */}
+      <CommentSection postId={id} />
     </div>
   );
 }

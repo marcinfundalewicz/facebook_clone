@@ -4,6 +4,7 @@ import { getUsers, addFriend } from "../api/api";
 export default function Navbar({ onLogout }) {
   const [search, setSearch] = useState("");
   const [users, setUsers] = useState([]);
+  const [dark, setDark] = useState(false);
 
   useEffect(() => {
     async function loadUsers() {
@@ -33,6 +34,7 @@ export default function Navbar({ onLogout }) {
 
   function toggleDarkMode() {
     document.body.classList.toggle("dark");
+    setDark(!dark);
   }
 
   return (
@@ -60,10 +62,9 @@ export default function Navbar({ onLogout }) {
         )}
       </div>
 
-      {/* RIGHT SIDE */}
       <div className="nav-right">
         <button className="mode-toggle" onClick={toggleDarkMode}>
-          🌙
+          {dark ? "☀️" : "🌙"}
         </button>
 
         <button className="logout-btn" onClick={onLogout}>

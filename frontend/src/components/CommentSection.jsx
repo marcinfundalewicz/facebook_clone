@@ -65,9 +65,11 @@ export default function CommentSection({ postId }) {
     <div className="comments">
       {comments.map((c) => (
         <div className="comment" key={c.id}>
-          <div className="avatar">
-            {c.authorUsername.substring(0, 2).toUpperCase()}
-          </div>
+          <img
+            className="avatar small"
+            src={`https://api.dicebear.com/7.x/initials/svg?seed=${c.authorUsername}`}
+            alt={c.authorUsername}
+          />
 
           <div className="comment-bubble">
             <strong>{c.authorUsername}</strong>
@@ -81,7 +83,11 @@ export default function CommentSection({ postId }) {
       <div ref={bottomRef}></div>
 
       <div className="comment-input">
-        <div className="avatar small">YO</div>
+        <img
+          className="avatar small"
+          src={`https://api.dicebear.com/7.x/initials/svg?seed=You`}
+          alt="You"
+        />
 
         <input
           value={content}
