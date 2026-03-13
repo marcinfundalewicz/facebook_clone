@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { toggleLike } from "../api/api";
 import CommentSection from "./CommentSection";
 import { getAvatar } from "../utils/avatar";
+import { useNavigate } from "react-router-dom";
 
 export default function PostCard({
   id,
@@ -12,6 +13,8 @@ export default function PostCard({
   likedByMe,
   createdAt,
 }) {
+  const navigate = useNavigate();
+
   const [likes, setLikes] = useState(likesCount ?? 0);
   const [liked, setLiked] = useState(likedByMe ?? false);
 
@@ -57,10 +60,20 @@ export default function PostCard({
     <div className="post-card">
       {/* HEADER */}
       <div className="post-header">
-        <img className="avatar" src={getAvatar(author)} alt={author} />
+        <img
+          className="avatar clickable"
+          src={getAvatar(author)}
+          alt={author}
+          onClick={() => navigate(`/profile/${author}`)}
+        />
 
         <div className="post-user-info">
-          <div className="post-user">{author}</div>
+          <div
+            className="post-user clickable"
+            onClick={() => navigate(`/profile/${author}`)}
+          >
+            {author}
+          </div>
           <div className="time">{timeAgo(createdAt)}</div>
         </div>
       </div>

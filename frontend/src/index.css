@@ -554,3 +554,11 @@ body.dark .post-actions button:hover {
   gap: 10px;
   margin-top: 10px;
 }
+
+.clickable {
+  cursor: pointer;
+}
+
+.clickable:hover {
+  text-decoration: underline;
+}
