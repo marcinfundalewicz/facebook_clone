@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getUsers, addFriend } from "../api/api";
+import { getAvatar } from "../utils/avatar";
 
 export default function Navbar({ onLogout }) {
   const [search, setSearch] = useState("");
@@ -66,6 +67,8 @@ export default function Navbar({ onLogout }) {
         <button className="mode-toggle" onClick={toggleDarkMode}>
           {dark ? "☀️" : "🌙"}
         </button>
+
+        <img className="avatar small" src={getAvatar("You")} alt="You" />
 
         <button className="logout-btn" onClick={onLogout}>
           Logout

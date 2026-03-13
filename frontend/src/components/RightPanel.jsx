@@ -1,3 +1,5 @@
+import { getAvatar } from "../utils/avatar";
+
 export default function RightPanel() {
   const users = ["John", "Anna", "Michael"];
 
@@ -8,11 +10,7 @@ export default function RightPanel() {
 
         {users.map((user) => (
           <div className="follow-item" key={user}>
-            <img
-              className="avatar small"
-              src={`https://api.dicebear.com/7.x/initials/svg?seed=${user}`}
-              alt={user}
-            />
+            <img className="avatar small" src={getAvatar(user)} alt={user} />
 
             <span>{user}</span>
           </div>

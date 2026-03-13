@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { toggleLike } from "../api/api";
 import CommentSection from "./CommentSection";
+import { getAvatar } from "../utils/avatar";
 
 export default function PostCard({
   id,
@@ -56,11 +57,7 @@ export default function PostCard({
     <div className="post-card">
       {/* HEADER */}
       <div className="post-header">
-        <img
-          className="avatar"
-          src={`https://api.dicebear.com/7.x/initials/svg?seed=${author}`}
-          alt={author}
-        />
+        <img className="avatar" src={getAvatar(author)} alt={author} />
 
         <div className="post-user-info">
           <div className="post-user">{author}</div>

@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { getComments, addComment } from "../api/api";
+import { getAvatar } from "../utils/avatar";
 
 export default function CommentSection({ postId }) {
   const [comments, setComments] = useState([]);
@@ -67,7 +68,7 @@ export default function CommentSection({ postId }) {
         <div className="comment" key={c.id}>
           <img
             className="avatar small"
-            src={`https://api.dicebear.com/7.x/initials/svg?seed=${c.authorUsername}`}
+            src={getAvatar(c.authorUsername)}
             alt={c.authorUsername}
           />
 
@@ -83,11 +84,7 @@ export default function CommentSection({ postId }) {
       <div ref={bottomRef}></div>
 
       <div className="comment-input">
-        <img
-          className="avatar small"
-          src={`https://api.dicebear.com/7.x/initials/svg?seed=You`}
-          alt="You"
-        />
+        <img className="avatar small" src={getAvatar("You")} alt="You" />
 
         <input
           value={content}
