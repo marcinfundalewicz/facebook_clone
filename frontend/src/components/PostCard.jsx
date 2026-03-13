@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { toggleLike } from "../api/api";
 import CommentSection from "./CommentSection";
+import { getAvatar } from "../utils/avatar";
+import { Link } from "react-router-dom";
 
 export default function PostCard({
   id,
@@ -33,60 +35,63 @@ export default function PostCard({
       await toggleLike(id);
     } catch (err) {
       console.error("Like failed", err);
-      setLiked(liked);
-      setLikes(likes);
+      setLiked(!newLiked);
+      setLikes(newLiked ? likes - 1 : likes + 1);
     }
   }
 
   function timeAgo(date) {
     if (!date) return "";
 
-    const seconds = Math.floor((new Date() - new Date(date)) / 1000);
-    if (isNaN(seconds)) return "";
-
+    const seconds = Math.floor((Date.now() - new Date(date)) / 1000);
     const minutes = Math.floor(seconds / 60);
     const hours = Math.floor(seconds / 3600);
 
     if (minutes < 1) return "just now";
-    if (minutes < 60) return minutes + " min ago";
-    if (hours < 24) return hours + " h ago";
+    if (minutes < 60) return minutes + "m";
+    if (hours < 24) return hours + "h";
 
-    return Math.floor(hours / 24) + " d ago";
+    return Math.floor(hours / 24) + "d";
   }
 
   return (
-    <article className="post-card">
+    <div className="post-card">
+      {/* HEADER */}
       <div className="post-header">
-        <img
-          className="avatar"
-          src={`https://api.dicebear.com/7.x/initials/svg?seed=${author}`}
-          alt={author}
-        />
+        <Link to={`/profile/${author}`}>
+          <img
+            className="avatar clickable"
+            src={getAvatar(author)}
+            alt={author}
+          />
+        </Link>
 
-        <div className="post-user">
-          <strong>{author}</strong>
+        <div className="post-user-info">
+          <Link to={`/profile/${author}`} className="post-user clickable">
+            {author}
+          </Link>
+
           <div className="time">{timeAgo(createdAt)}</div>
         </div>
       </div>
 
-      <p className="post-content">{content}</p>
+      {/* CONTENT */}
+      <div className="post-content">{content}</div>
 
-      <div className="post-stats">
-        ❤️ {likes} · 💬 {commentsCount}
-      </div>
-
+      {/* ACTIONS */}
       <div className="post-actions">
         <button
           onClick={handleLike}
           className={`like-button ${liked ? "liked" : ""}`}
         >
-          {liked ? "❤️ Liked" : "🤍 Like"}
+          {liked ? "❤️" : "🤍"} {likes}
         </button>
 
-        <button>💬 Comment</button>
+        <button>💬 {commentsCount}</button>
       </div>
 
+      {/* COMMENTS */}
       <CommentSection postId={id} />
-    </article>
+    </div>
   );
 }

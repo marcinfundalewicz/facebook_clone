@@ -17,14 +17,7 @@ client.interceptors.request.use((config) => {
 client.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401 || error.response?.status === 403) {
-      console.log("JWT expired → logging out");
-
-      localStorage.removeItem("token");
-
-      window.location.href = "/";
-    }
-
+    console.log("API error:", error.response?.status);
     return Promise.reject(error);
   }
 );

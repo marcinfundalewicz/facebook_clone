@@ -28,12 +28,13 @@ export function addComment(postId, content) {
 export const getSocialFeed = () => {
   return client.get("/api/posts/social");
 };
-export const getFriend = () => {
-  return client.get("/api/friends");
-};
+
 export const removeFriend = (id) => {
   return client.delete(`/api/friends/${id}`);
 };
 export const getUsers = () => client.get("/api/users");
 export const getFriends = () => client.get("/api/friends");
 export const addFriend = (userId) => client.post(`/api/friends/${userId}`);
+export function getUserPosts(username) {
+  return client.get(`/api/posts/user/${username}`);
+}

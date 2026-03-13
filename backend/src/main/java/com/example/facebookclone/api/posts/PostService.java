@@ -81,4 +81,8 @@ public class PostService {
                 likedByMe
         );
     }
+    public Page<PostResponse> getUserPosts(String username, int page, int size, User viewer) {
+        return postRepository.findByAuthorUsername(username, PageRequest.of(page, size))
+                .map(post -> toResponse(post, viewer));
+    }
 }

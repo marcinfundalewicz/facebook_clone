@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { getAvatar } from "../utils/avatar";
 
 export default function CreatePost({ onAddPost }) {
   const [text, setText] = useState("");
@@ -20,7 +21,7 @@ export default function CreatePost({ onAddPost }) {
   return (
     <div className="create-post">
       <div className="create-post-header">
-        <div className="avatar">YO</div>
+        <img className="avatar" src={getAvatar("You")} alt="You" />
 
         <textarea
           value={text}

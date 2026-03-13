@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { getComments, addComment } from "../api/api";
+import { getAvatar } from "../utils/avatar";
 
 export default function CommentSection({ postId }) {
   const [comments, setComments] = useState([]);
@@ -65,9 +66,11 @@ export default function CommentSection({ postId }) {
     <div className="comments">
       {comments.map((c) => (
         <div className="comment" key={c.id}>
-          <div className="avatar">
-            {c.authorUsername.substring(0, 2).toUpperCase()}
-          </div>
+          <img
+            className="avatar small"
+            src={getAvatar(c.authorUsername)}
+            alt={c.authorUsername}
+          />
 
           <div className="comment-bubble">
             <strong>{c.authorUsername}</strong>
@@ -81,7 +84,7 @@ export default function CommentSection({ postId }) {
       <div ref={bottomRef}></div>
 
       <div className="comment-input">
-        <div className="avatar small">YO</div>
+        <img className="avatar small" src={getAvatar("You")} alt="You" />
 
         <input
           value={content}
