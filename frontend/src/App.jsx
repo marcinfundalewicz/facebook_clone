@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useAuth } from "./auth/AuthContext";
-
 import Feed from "./pages/Feed";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
