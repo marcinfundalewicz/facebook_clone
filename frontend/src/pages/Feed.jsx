@@ -3,13 +3,15 @@ import CreatePost from "../components/CreatePost";
 import PostCard from "../components/PostCard";
 import { getPosts, getSocialFeed, createPost } from "../api/api.js";
 import Toast from "../components/Toast";
+import Sidebar from "../components/Sidebar";
 
 export default function Feed() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [mode] = useState("all");
   const [toast, setToast] = useState(null);
   const [error, setError] = useState(null);
+
+  const mode = "all";
 
   useEffect(() => {
     async function loadPosts() {
@@ -42,7 +44,7 @@ export default function Feed() {
     }
   }
 
-  if (error) {
+  if (loading) {
     return (
       <div className="feed-container">
         {[1, 2, 3].map((i) => (
@@ -60,6 +62,10 @@ export default function Feed() {
     );
   }
 
+  if (error) {
+    return <div className="loader">{error}</div>;
+  }
+
   if (!loading && posts.length === 0) {
     return (
       <div style={{ textAlign: "center", marginTop: "40px" }}>
@@ -71,13 +77,10 @@ export default function Feed() {
 
   return (
     <div className="layout">
-      <div className="sidebar">
-        <div className="sidebar-item">🏠 Home</div>
-        <div className="sidebar-item">👥 Friends</div>
-        <div className="sidebar-item">📝 My Posts</div>
-        <div className="sidebar-item">⚙ Settings</div>
-      </div>
+      {/* LEFT SIDEBAR */}
+      <Sidebar />
 
+      {/* FEED */}
       <div className="feed">
         <CreatePost onAddPost={handleAddPost} />
 
@@ -95,14 +98,18 @@ export default function Feed() {
         ))}
       </div>
 
+      {/* RIGHT PANEL */}
       <div className="right-panel">
         <div className="right-card">
-          <h4>Suggestions</h4>
+          <h4>Who to follow</h4>
           <div className="sidebar-item">John</div>
           <div className="sidebar-item">Anna</div>
           <div className="sidebar-item">Michael</div>
         </div>
       </div>
+
+      {/* TOAST */}
+      {toast && <Toast message={toast} onClose={() => setToast(null)} />}
     </div>
   );
 }

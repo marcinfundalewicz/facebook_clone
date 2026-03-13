@@ -711,3 +711,41 @@ body.dark .right-card {
 body.dark .sidebar-item:hover {
   background: #3a3b3c;
 }
+.sidebar {
+  background: white;
+  padding: 20px;
+
+  border-radius: 16px;
+
+  height: fit-content;
+
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font-size: 16px;
+
+  padding: 10px 12px;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  transition: background 0.15s ease;
+}
+
+.sidebar-item:hover {
+  background: #f0f2f5;
+}
+
+body.dark .sidebar-item:hover {
+  background: #3a3b3c;
+}
