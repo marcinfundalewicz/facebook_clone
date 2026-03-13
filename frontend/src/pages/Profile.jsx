@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { getAvatar } from "../utils/avatar";
 import PostCard from "../components/PostCard";
 import { getUserPosts } from "../api/api";
+import Sidebar from "../components/Sidebar";
+import RightPanel from "../components/RightPanel";
 
 export default function Profile() {
   const { username } = useParams();
@@ -12,7 +14,9 @@ export default function Profile() {
     async function load() {
       try {
         const res = await getUserPosts(username);
-        setPosts(res.data);
+
+        // TU JEST KLUCZ
+        setPosts(res.data.content);
       } catch (err) {
         console.error("Failed to load user posts", err);
       }
@@ -22,18 +26,19 @@ export default function Profile() {
   }, [username]);
 
   return (
-    <div className="profile-page">
-      <div className="profile-header">
-        <img
-          className="avatar large"
-          src={getAvatar(username)}
-          alt={username}
-        />
+    <div className="layout">
+      <Sidebar />
 
-        <h2>{username}</h2>
-      </div>
+      <div className="feed">
+        <div className="profile-header">
+          <img
+            className="avatar large"
+            src={getAvatar(username)}
+            alt={username}
+          />
+          <h2>{username}</h2>
+        </div>
 
-      <div className="profile-posts">
         {posts.map((post) => (
           <PostCard
             key={post.id}
@@ -47,6 +52,8 @@ export default function Profile() {
           />
         ))}
       </div>
+
+      <RightPanel />
     </div>
   );
 }

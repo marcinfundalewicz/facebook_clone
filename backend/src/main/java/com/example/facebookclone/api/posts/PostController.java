@@ -83,4 +83,21 @@ public class PostController {
 
         return postService.getSocialFeed(page, size, user);
     }
+
+    @GetMapping("/user/{username}")
+    public Page<PostResponse> getUserPosts(
+            @PathVariable String username,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            org.springframework.security.core.Authentication authentication
+    ) {
+
+        User user = null;
+
+        if (authentication != null && authentication.getPrincipal() instanceof User) {
+            user = (User) authentication.getPrincipal();
+        }
+
+        return postService.getUserPosts(username, page, size, user);
+    }
 }

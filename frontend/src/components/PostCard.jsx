@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { toggleLike } from "../api/api";
 import CommentSection from "./CommentSection";
 import { getAvatar } from "../utils/avatar";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function PostCard({
   id,
@@ -13,8 +13,6 @@ export default function PostCard({
   likedByMe,
   createdAt,
 }) {
-  const navigate = useNavigate();
-
   const [likes, setLikes] = useState(likesCount ?? 0);
   const [liked, setLiked] = useState(likedByMe ?? false);
 
@@ -37,8 +35,8 @@ export default function PostCard({
       await toggleLike(id);
     } catch (err) {
       console.error("Like failed", err);
-      setLiked(liked);
-      setLikes(likes);
+      setLiked(!newLiked);
+      setLikes(newLiked ? likes - 1 : likes + 1);
     }
   }
 
@@ -60,20 +58,19 @@ export default function PostCard({
     <div className="post-card">
       {/* HEADER */}
       <div className="post-header">
-        <img
-          className="avatar clickable"
-          src={getAvatar(author)}
-          alt={author}
-          onClick={() => navigate(`/profile/${author}`)}
-        />
+        <Link to={`/profile/${author}`}>
+          <img
+            className="avatar clickable"
+            src={getAvatar(author)}
+            alt={author}
+          />
+        </Link>
 
         <div className="post-user-info">
-          <div
-            className="post-user clickable"
-            onClick={() => navigate(`/profile/${author}`)}
-          >
+          <Link to={`/profile/${author}`} className="post-user clickable">
             {author}
-          </div>
+          </Link>
+
           <div className="time">{timeAgo(createdAt)}</div>
         </div>
       </div>

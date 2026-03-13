@@ -36,5 +36,5 @@ export const getUsers = () => client.get("/api/users");
 export const getFriends = () => client.get("/api/friends");
 export const addFriend = (userId) => client.post(`/api/friends/${userId}`);
 export function getUserPosts(username) {
-  return client.get(`/api/users/${username}/posts`);
+  return client.get(`/api/posts/user/${username}`);
 }
