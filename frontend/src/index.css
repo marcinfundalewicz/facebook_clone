@@ -633,3 +633,18 @@ button.primary {
 .avatar:hover {
   transform: scale(1.08);
 }
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 12px;
+  border-radius: 10px;
+
+  font-weight: 500;
+}
+
+.sidebar-item:hover {
+  background: #f0f2f5;
+}
