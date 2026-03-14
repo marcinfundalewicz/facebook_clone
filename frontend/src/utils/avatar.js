@@ -1,3 +1,5 @@
-export function getAvatar(username) {
-  return `https://api.dicebear.com/7.x/thumbs/svg?seed=${username}&size=64`;
+export function getAvatar(seed) {
+  const id = seed.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0);
+
+  return `https://i.pravatar.cc/150?img=${id % 70}`;
 }
