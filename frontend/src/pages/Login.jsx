@@ -7,15 +7,19 @@ export default function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
 
     try {
+      setLoading(true);
       const res = await login(email, password);
       setAuthToken(res.data.token);
     } catch {
       alert("Login failed");
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -23,23 +27,25 @@ export default function Login() {
     <div className="login-layout">
       {/* LEFT SIDE */}
       <div className="login-hero">
-        <h1>FacebookClone</h1>
+        <div className="hero-content">
+          <h1>FacebookClone</h1>
+          <p>Connect with friends and the world around you.</p>
+        </div>
       </div>
 
       {/* RIGHT SIDE */}
       <div className="login-panel">
-        <h2>Happening now</h2>
-        <h3>Join today.</h3>
+        <h2>Welcome back</h2>
 
         <div className="login-social">
           <button className="social-btn">
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" />
-            Sign up with Google
+            Continue with Google
           </button>
 
           <button className="social-btn">
             <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg" />
-            Sign up with Apple
+            Continue with Apple
           </button>
 
           <div className="divider">
@@ -48,21 +54,27 @@ export default function Login() {
         </div>
 
         <form onSubmit={handleSubmit}>
-          <input
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+          <div className="input-group">
+            <span className="input-icon">📧</span>
+            <input
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
 
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <div className="input-group">
+            <span className="input-icon">🔒</span>
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
 
           <button className="primary" type="submit">
-            Sign in
+            {loading ? "Signing in..." : "Sign in"}
           </button>
         </form>
 
