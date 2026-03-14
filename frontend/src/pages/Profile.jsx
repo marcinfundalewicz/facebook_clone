@@ -15,7 +15,6 @@ export default function Profile() {
       try {
         const res = await getUserPosts(username);
 
-        // TU JEST KLUCZ
         setPosts(res.data.content);
       } catch (err) {
         console.error("Failed to load user posts", err);
@@ -32,11 +31,22 @@ export default function Profile() {
       <div className="feed">
         <div className="profile-header">
           <img
-            className="avatar large"
             src={getAvatar(username)}
+            className="avatar large"
             alt={username}
           />
-          <h2>{username}</h2>
+
+          <div className="profile-info">
+            <h2>{username}</h2>
+
+            <div className="profile-stats">
+              <span>{posts.length} posts</span>
+
+              <span>120 followers</span>
+
+              <span>80 following</span>
+            </div>
+          </div>
         </div>
 
         {posts.map((post) => (

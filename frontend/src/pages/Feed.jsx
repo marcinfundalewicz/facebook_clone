@@ -5,6 +5,7 @@ import { getPosts, getSocialFeed, createPost } from "../api/api.js";
 import Toast from "../components/Toast";
 import Sidebar from "../components/Sidebar";
 import RightPanel from "../components/RightPanel";
+import Stories from "../components/Stories";
 
 export default function Feed() {
   const [posts, setPosts] = useState([]);
@@ -83,6 +84,7 @@ export default function Feed() {
 
       {/* FEED */}
       <div className="feed">
+        <Stories />
         <CreatePost onAddPost={handleAddPost} />
 
         {posts.map((post) => (

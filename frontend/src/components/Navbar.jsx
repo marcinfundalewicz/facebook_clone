@@ -20,9 +20,9 @@ export default function Navbar({ onLogout }) {
     loadUsers();
   }, []);
 
-  const filtered = users.filter((u) =>
-    u.username.toLowerCase().includes(search.toLowerCase())
-  );
+  const filtered = users
+    .filter((u) => u.username.toLowerCase().includes(search.toLowerCase()))
+    .slice(0, 5); // max 5 wyników
 
   async function handleAddFriend(id) {
     try {
@@ -68,7 +68,7 @@ export default function Navbar({ onLogout }) {
           {dark ? "☀️" : "🌙"}
         </button>
 
-        <img className="avatar small" src={getAvatar("You")} alt="You" />
+        <img className="avatar small" src={getAvatar("me")} alt="my profile" />
 
         <button className="logout-btn" onClick={onLogout}>
           Logout

@@ -78,17 +78,45 @@ export default function PostCard({
       {/* CONTENT */}
       <div className="post-content">{content}</div>
 
-      {/* ACTIONS */}
-      <div className="post-actions">
-        <button
-          onClick={handleLike}
-          className={`like-button ${liked ? "liked" : ""}`}
-        >
-          {liked ? "❤️" : "🤍"} {likes}
+      {/* REACTIONS */}
+      <div className="post-reactions">
+        <div className="reaction-emojis">
+          <span>👍</span>
+          <span>❤️</span>
+          <span>😂</span>
+        </div>
+
+        <div className="reaction-avatars">
+          {[...Array(Math.min(likes, 3))].map((_, i) => (
+            <img
+              key={i}
+              src={getAvatar("like" + i)}
+              className="reaction-avatar"
+            />
+          ))}
+        </div>
+
+        <span className="likes-count">
+          {likes} {likes === 1 ? "like" : "likes"}
+        </span>
+      </div>
+
+      {/* POST STATS */}
+      <div className="post-stats">
+        <span className="comments-count">{commentsCount} comments</span>
+      </div>
+
+      {/* BUTTON BAR */}
+      <div className="post-buttons">
+        <button onClick={handleLike} className={liked ? "liked" : ""}>
+          👍 Like
         </button>
 
-        <button>💬 {commentsCount}</button>
+        <button>💬 Comment</button>
       </div>
+
+      {/* DIVIDER */}
+      <div className="post-divider"></div>
 
       {/* COMMENTS */}
       <CommentSection postId={id} />
