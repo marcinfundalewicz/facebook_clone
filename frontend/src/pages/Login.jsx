@@ -28,7 +28,24 @@ export default function Login() {
 
       {/* RIGHT SIDE */}
       <div className="login-panel">
-        <h2>Welcome back</h2>
+        <h2>Happening now</h2>
+        <h3>Join today.</h3>
+
+        <div className="login-social">
+          <button className="social-btn">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" />
+            Sign up with Google
+          </button>
+
+          <button className="social-btn">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg" />
+            Sign up with Apple
+          </button>
+
+          <div className="divider">
+            <span>or</span>
+          </div>
+        </div>
 
         <form onSubmit={handleSubmit}>
           <input
@@ -44,8 +61,14 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <button type="submit">Sign in</button>
+          <button className="primary" type="submit">
+            Sign in
+          </button>
         </form>
+
+        <p className="login-footer">
+          Don't have an account? <span>Sign up</span>
+        </p>
       </div>
     </div>
   );
