@@ -78,16 +78,35 @@ export default function PostCard({
       {/* CONTENT */}
       <div className="post-content">{content}</div>
 
+      {/* REACTIONS */}
+      <div className="post-reactions">
+        {likes > 0 && (
+          <>
+            {[...Array(Math.min(likes, 3))].map((_, i) => (
+              <img
+                key={i}
+                src={getAvatar("like" + i)}
+                className="reaction-avatar"
+              />
+            ))}
+
+            <span>
+              {likes} {likes === 1 ? "like" : "likes"}
+            </span>
+          </>
+        )}
+      </div>
+
       {/* POST STATS */}
       <div className="post-stats">
-        <span>👍 {likes}</span>
-
         <span className="comments-count">{commentsCount} comments</span>
       </div>
 
       {/* BUTTON BAR */}
       <div className="post-buttons">
-        <button onClick={handleLike}>👍 Like</button>
+        <button onClick={handleLike} className={liked ? "liked" : ""}>
+          👍 Like
+        </button>
 
         <button>💬 Comment</button>
       </div>

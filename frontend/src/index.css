@@ -1029,3 +1029,76 @@ button.primary {
   align-items: center;
   gap: 10px;
 }
+
+.post-reactions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.reaction-avatar {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+
+  border: 2px solid white;
+
+  margin-left: -6px;
+}
+
+.post-buttons button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  font-weight: 600;
+
+  color: #65676b;
+}
+
+.post-buttons button:hover {
+  background: #f0f2f5;
+}
+
+.post-content {
+  font-size: 16px;
+
+  margin: 14px 0;
+
+  line-height: 1.5;
+}
+
+.post-user {
+  font-weight: 700;
+}
+
+.time {
+  font-size: 13px;
+  color: #65676b;
+}
+
+.post-reactions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  margin-top: 6px;
+
+  font-size: 14px;
+}
+
+.reaction-avatar {
+  width: 18px;
+  height: 18px;
+
+  border-radius: 50%;
+
+  border: 2px solid white;
+
+  margin-left: -6px;
+}
+
+.post-buttons .liked {
+  color: #1877f2;
+  font-weight: 600;
+}
