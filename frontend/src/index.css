@@ -806,3 +806,18 @@ button.primary {
 .avatar:hover {
   transform: scale(1.08);
 }
+
+.follow-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  margin-top: 10px;
+
+  cursor: pointer;
+}
+
+.follow-item:hover {
+  background: #f0f2f5;
+  border-radius: 8px;
+}
