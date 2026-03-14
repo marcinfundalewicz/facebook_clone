@@ -1247,3 +1247,64 @@ button.primary {
 .reaction-avatar:hover {
   transform: translateY(-5px) scale(1.15);
 }
+
+body.dark {
+  background: #0f1115;
+  color: #e4e6eb;
+}
+
+/* cards */
+
+body.dark .post-card,
+body.dark .right-card,
+body.dark .sidebar,
+body.dark .create-post,
+body.dark .stories {
+  background: #1c1e21;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.6);
+}
+
+/* navbar */
+
+body.dark .navbar {
+  background: #1c1e21;
+  border-bottom: 1px solid #2e3035;
+}
+
+body.dark .post-divider,
+body.dark .post-buttons,
+body.dark .post-stats {
+  border-color: #2e3035;
+}
+
+body.dark .time,
+body.dark .comments-count,
+body.dark .likes-count {
+  color: #a8abaf;
+}
+
+body.dark .post-buttons button:hover {
+  background: #2e3035;
+}
+
+body.dark .comment-bubble {
+  background: #2a2d31;
+}
+
+body.dark .comment-input input {
+  background: #2a2d31;
+  border: none;
+  color: white;
+}
+
+body.dark .stories {
+  background: #1c1e21;
+}
+
+.post-card {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-2px);
+}
