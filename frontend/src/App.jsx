@@ -4,6 +4,8 @@ import { useAuth } from "./auth/AuthContext";
 import Feed from "./pages/Feed";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
+import Register from "./pages/Register";
+
 import Navbar from "./components/Navbar";
 
 export default function App() {
@@ -11,7 +13,14 @@ export default function App() {
 
   if (loading) return null;
 
-  if (!token) return <Login />;
+  if (!token) {
+    return (
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
+    );
+  }
 
   return (
     <>
