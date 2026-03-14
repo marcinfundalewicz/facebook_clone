@@ -974,3 +974,58 @@ button.primary {
 .profile-header:hover {
   transform: translateY(-2px);
 }
+
+.post-divider {
+  height: 1px;
+  background: #e4e6eb;
+  margin: 10px 0;
+}
+
+.post-stats {
+  display: flex;
+  justify-content: space-between;
+
+  font-size: 14px;
+  color: #65676b;
+
+  margin-top: 6px;
+}
+
+.post-buttons {
+  display: flex;
+  justify-content: space-around;
+
+  border-top: 1px solid #e4e6eb;
+  border-bottom: 1px solid #e4e6eb;
+
+  padding: 8px 0;
+
+  margin: 10px 0;
+}
+
+.post-buttons button {
+  background: transparent;
+  border: none;
+
+  cursor: pointer;
+
+  font-weight: 500;
+}
+
+.post-buttons button:hover {
+  background: #f0f2f5;
+  border-radius: 6px;
+}
+
+.post-content {
+  font-size: 15px;
+  line-height: 1.5;
+
+  margin: 10px 0;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
