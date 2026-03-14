@@ -884,3 +884,11 @@ button.primary {
 .post-actions button:hover {
   background: #f0f2f5;
 }
+
+.avatar {
+  transition: transform .15s ease;
+}
+
+.avatar:hover {
+  transform: scale(1.1);
+}
