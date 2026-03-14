@@ -1,91 +1,79 @@
 import { useState } from "react";
-import { login } from "../api/api";
 import { useAuth } from "../auth/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
-  const { login: setAuthToken } = useAuth();
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
 
     try {
-      setLoading(true);
-      const res = await login(email, password);
-      setAuthToken(res.data.token);
-    } catch {
+      await login(email, password);
+    } catch (err) {
       alert("Login failed");
-    } finally {
-      setLoading(false);
     }
   }
 
   return (
     <div className="login-layout">
-      {/* LEFT SIDE */}
       <div className="login-hero">
-        <div className="hero-content">
+        <div className="login-hero-content">
           <h1>FacebookClone</h1>
+
           <p>Connect with friends and the world around you.</p>
         </div>
       </div>
 
-      {/* RIGHT SIDE */}
       <div className="login-panel">
-        <h2>Welcome back</h2>
+        <h2>Sign in</h2>
+
+        <p className="login-subtitle">
+          Connect with friends and the world around you.
+        </p>
 
         <div className="login-social">
           <button className="social-btn">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" />
-            Continue with Google
+            <img src="/google.svg" alt="google" />
+            Sign in with Google
           </button>
 
           <button className="social-btn">
-            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg" />
-            Continue with Apple
+            <img src="/apple.svg" alt="apple" />
+            Sign in with Apple
           </button>
+        </div>
 
-          <div className="divider">
-            <span>or</span>
-          </div>
+        <div className="divider">
+          <span>or</span>
         </div>
 
         <form onSubmit={handleSubmit}>
-          <div className="input-group">
-            <span className="input-icon">📧</span>
-            <input
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
 
-          <div className="input-group">
-            <span className="input-icon">🔒</span>
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
 
-          <button className="primary" type="submit">
-            {loading ? "Signing in..." : "Sign in"}
-          </button>
+          <button className="primary">Sign in</button>
         </form>
 
-        <p className="login-footer">
-          Don't have an account? <span>Sign up</span>
-        </p>
-      </div>
-      <div className="login-footer">
-        Don't have an account?
-        <span onClick={() => navigate("/register")}>Sign up</span>
+        <div className="login-footer">
+          Don't have an account?{" "}
+          <span onClick={() => navigate("/register")}>Sign up</span>
+        </div>
       </div>
     </div>
   );

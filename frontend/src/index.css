@@ -1736,7 +1736,7 @@ body.dark .social-btn:hover {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding-left: 525px;
+    padding-left: 2000px;
     padding-top: 200px;
 
     color: white;
@@ -1781,8 +1781,6 @@ body.dark .social-btn:hover {
 }
 
 .login-hero-content {
-    transform: translateX(-200px);
-
     padding: 30px 40px;
 
     background: linear-gradient(
@@ -1791,4 +1789,114 @@ body.dark .social-btn:hover {
     );
 
     border-radius: 16px;
+}
+
+.login-footer {
+    margin-top: 20px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.login-footer span {
+    color: #1877f2;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.login-footer span:hover {
+    text-decoration: underline;
+}
+
+.login-panel {
+    background: white;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 60px;
+
+    height: 100%;
+}
+
+.login-layout {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    height: 100vh;
+    overflow: hidden;
+}
+
+
+.login-subtitle {
+    font-size: 14px;
+    color: #65676b;
+    margin-bottom: 20px;
+}
+
+.login-social {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    padding: 10px;
+
+    border-radius: 30px;
+    border: 1px solid #ddd;
+
+    background: white;
+    cursor: pointer;
+
+    transition: background .15s;
+}
+
+.social-btn img {
+    width: 18px;
+    height: 18px;
+}
+
+.social-btn:hover {
+    background: #f5f5f5;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #ddd;
+}
+
+.divider span {
+    font-size: 12px;
+    color: #777;
+}
+
+.login-footer {
+    margin-top: 20px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.login-footer span {
+    color: #1877f2;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.login-footer span:hover {
+    text-decoration: underline;
 }
