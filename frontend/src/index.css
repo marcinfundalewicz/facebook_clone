@@ -624,3 +624,12 @@ button.primary {
   flex-direction: column;
   gap: 12px;
 }
+
+.avatar {
+  cursor: pointer;
+  transition: transform .15s ease;
+}
+
+.avatar:hover {
+  transform: scale(1.08);
+}
