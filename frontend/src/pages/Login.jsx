@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { login } from "../api/api";
 import { useAuth } from "../auth/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const { login: setAuthToken } = useAuth();
@@ -81,6 +82,10 @@ export default function Login() {
         <p className="login-footer">
           Don't have an account? <span>Sign up</span>
         </p>
+      </div>
+      <div className="login-footer">
+        Don't have an account?
+        <span onClick={() => navigate("/register")}>Sign up</span>
       </div>
     </div>
   );
