@@ -84,7 +84,7 @@ export default function PostCard({
           onClick={handleLike}
           className={`like-button ${liked ? "liked" : ""}`}
         >
-          {liked ? "❤️" : "🤍"} {likes}
+          👍 {likes}
         </button>
 
         <button>💬 {commentsCount}</button>
