@@ -8,6 +8,7 @@ export default function PostCard({
   id,
   author,
   content,
+  imageUrl,
   likesCount,
   commentsCount,
   likedByMe,
@@ -35,6 +36,7 @@ export default function PostCard({
       await toggleLike(id);
     } catch (err) {
       console.error("Like failed", err);
+
       setLiked(!newLiked);
       setLikes(newLiked ? likes - 1 : likes + 1);
     }
@@ -57,6 +59,7 @@ export default function PostCard({
   return (
     <div className="post-card">
       {/* HEADER */}
+
       <div className="post-header">
         <Link to={`/profile/${author}`}>
           <img
@@ -76,9 +79,24 @@ export default function PostCard({
       </div>
 
       {/* CONTENT */}
+
       <div className="post-content">{content}</div>
 
+      {/* IMAGE */}
+
+      {imageUrl && (
+        <img
+          src={imageUrl}
+          alt="post"
+          className="post-image"
+          onError={(e) => {
+            e.target.style.display = "none";
+          }}
+        />
+      )}
+
       {/* REACTIONS */}
+
       <div className="post-reactions">
         <div className="reaction-emojis">
           <span>👍</span>
@@ -102,11 +120,13 @@ export default function PostCard({
       </div>
 
       {/* POST STATS */}
+
       <div className="post-stats">
         <span className="comments-count">{commentsCount} comments</span>
       </div>
 
-      {/* BUTTON BAR */}
+      {/* BUTTONS */}
+
       <div className="post-buttons">
         <button onClick={handleLike} className={liked ? "liked" : ""}>
           👍 Like
@@ -116,9 +136,11 @@ export default function PostCard({
       </div>
 
       {/* DIVIDER */}
+
       <div className="post-divider"></div>
 
       {/* COMMENTS */}
+
       <CommentSection postId={id} />
     </div>
   );

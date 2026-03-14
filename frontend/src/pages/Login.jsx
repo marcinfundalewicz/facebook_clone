@@ -14,6 +14,8 @@ export default function Login() {
 
     try {
       await login(email, password);
+
+      navigate("/"); // po loginie przechodzimy do feedu
     } catch (err) {
       alert("Login failed");
     }
@@ -24,7 +26,6 @@ export default function Login() {
       <div className="login-hero">
         <div className="login-hero-content">
           <h1>FacebookClone</h1>
-
           <p>Connect with friends and the world around you.</p>
         </div>
       </div>

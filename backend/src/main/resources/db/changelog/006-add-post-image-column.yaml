@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: 006-add-post-image
+      author: marcin
+      changes:
+        - addColumn:
+            tableName: posts
+            columns:
+              - column:
+                  name: image_url
+                  type: varchar(1000)

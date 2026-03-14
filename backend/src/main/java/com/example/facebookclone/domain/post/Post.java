@@ -22,6 +22,9 @@ public class Post {
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
+    @Column(length = 1000)
+    private String imageUrl;
+
     public Post() {
     }
 
@@ -55,5 +58,13 @@ public class Post {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

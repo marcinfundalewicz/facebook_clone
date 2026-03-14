@@ -32,9 +32,9 @@ export default function Feed() {
     loadPosts();
   }, [mode]);
 
-  async function handleAddPost(content) {
+  async function handleAddPost(content, imageUrl) {
     try {
-      await createPost(content);
+      await createPost(content, imageUrl);
       const res = await getPosts();
       setPosts(res.data.content);
 
@@ -93,6 +93,7 @@ export default function Feed() {
             id={post.id}
             author={post.authorUsername}
             content={post.content}
+            imageUrl={post.imageUrl}
             likesCount={post.likesCount}
             commentsCount={post.commentsCount}
             likedByMe={post.likedByMe}

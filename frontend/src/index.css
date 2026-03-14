@@ -1900,3 +1900,50 @@ body.dark .social-btn:hover {
 .login-footer span:hover {
     text-decoration: underline;
 }
+
+.post-image {
+    width: 100%;
+    border-radius: 12px;
+    margin-top: 10px;
+    max-height: 500px;
+    object-fit: cover;
+}
+
+.post-image {
+    width: 100%;
+    border-radius: 12px;
+    margin-top: 12px;
+    max-height: 500px;
+    object-fit: cover;
+}
+
+.image-input {
+
+    width: 100%;
+
+    border-radius: 8px;
+    border: 1px solid #ddd;
+
+    padding: 8px 10px;
+
+    margin-top: 8px;
+
+    font-size: 14px;
+
+}
+
+body.dark .image-input {
+
+    background: #2a2d31;
+    border: none;
+    color: white;
+
+}
+
+.post-image {
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 12px;
+    max-height: 450px;
+    object-fit: cover;
+}
