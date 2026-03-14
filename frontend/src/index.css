@@ -932,3 +932,45 @@ button.primary {
 
   color: #777;
 }
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.post-card {
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow: 0 10px 28px rgba(0,0,0,0.15);
+}
+
+.skeleton-post {
+  background: white;
+
+  height: 120px;
+
+  border-radius: 16px;
+
+  animation: pulse 1.2s infinite;
+
+  opacity: .6;
+}
+
+@keyframes pulse {
+  0% { opacity: .4 }
+  50% { opacity: .8 }
+  100% { opacity: .4 }
+}
+
+.profile-header {
+  transition: transform .15s ease;
+}
+
+.profile-header:hover {
+  transform: translateY(-2px);
+}
