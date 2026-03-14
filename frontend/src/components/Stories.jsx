@@ -13,10 +13,10 @@ const users = [
 export default function Stories() {
   return (
     <div className="stories">
-      {users.map((u) => (
-        <div className="story" key={u}>
-          <img src={getAvatar(u)} className="avatar story-avatar" />
-          <span>{u}</span>
+      {users.map((user) => (
+        <div className="story" key={user}>
+          <img src={getAvatar(user)} className="avatar story-avatar" />
+          <span>{user}</span>
         </div>
       ))}
     </div>
