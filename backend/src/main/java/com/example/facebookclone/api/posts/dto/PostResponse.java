@@ -10,8 +10,9 @@ public class PostResponse {
     private long likesCount;
     private long commentsCount;
     private boolean likedByMe;
+    private String imageUrl;
 
-    public PostResponse(Long id, String content, String authorUsername, LocalDateTime createdAt, long likesCount, long commentsCount, boolean likedByMe) {
+    public PostResponse(Long id, String content, String authorUsername, LocalDateTime createdAt, long likesCount, long commentsCount, boolean likedByMe, String imageUrl) {
         this.id = id;
         this.content = content;
         this.authorUsername = authorUsername;
@@ -19,6 +20,7 @@ public class PostResponse {
         this.likesCount = likesCount;
         this.commentsCount = commentsCount;
         this.likedByMe = likedByMe;
+        this.imageUrl = imageUrl;
     }
 
     public Long getId() {
@@ -75,5 +77,13 @@ public class PostResponse {
 
     public void setLikedByMe(boolean likedByMe) {
         this.likedByMe = likedByMe;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

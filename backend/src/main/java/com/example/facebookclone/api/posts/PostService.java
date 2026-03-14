@@ -35,6 +35,7 @@ public class PostService {
     public void create(PostCreateRequest request, User author) {
         Post post = new Post();
         post.setContent(request.getContent());
+        post.setImageUrl(request.getImageUrl());
         post.setAuthor(author);
         post.setCreatedAt(LocalDateTime.now());
         postRepository.save(post);
@@ -78,7 +79,8 @@ public class PostService {
                 post.getCreatedAt(),
                 likesCount,
                 commentsCount,
-                likedByMe
+                likedByMe,
+                post.getImageUrl()
         );
     }
     public Page<PostResponse> getUserPosts(String username, int page, int size, User viewer) {

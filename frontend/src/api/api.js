@@ -15,8 +15,11 @@ export function getFeed(page = 0) {
 export function toggleLike(postId) {
   return client.post(`/api/posts/${postId}/reactions`);
 }
-export function createPost(content) {
-  return client.post("/api/posts", { content });
+export function createPost(content, imageUrl) {
+  return client.post("/api/posts", {
+    content,
+    imageUrl,
+  });
 }
 export function getComments(postId) {
   return client.get(`/api/posts/${postId}/comments`);

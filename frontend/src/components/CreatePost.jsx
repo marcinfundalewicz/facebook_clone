@@ -3,16 +3,21 @@ import { getAvatar } from "../utils/avatar";
 
 export default function CreatePost({ onAddPost }) {
   const [text, setText] = useState("");
+  const [image, setImage] = useState("");
   const [posting, setPosting] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
+
     if (!text.trim()) return;
 
     try {
       setPosting(true);
-      await onAddPost(text);
+
+      await onAddPost(text, image);
+
       setText("");
+      setImage("");
     } finally {
       setPosting(false);
     }
@@ -29,6 +34,15 @@ export default function CreatePost({ onAddPost }) {
           placeholder="What's on your mind?"
         />
       </div>
+
+      {/* IMAGE URL INPUT */}
+
+      <input
+        className="image-input"
+        placeholder="Image URL (optional)"
+        value={image}
+        onChange={(e) => setImage(e.target.value)}
+      />
 
       <button className="primary" onClick={handleSubmit} disabled={posting}>
         {posting ? "Posting..." : "Post"}
