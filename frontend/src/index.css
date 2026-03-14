@@ -711,3 +711,27 @@ button.primary {
   font-weight: 600;
   font-size: 15px;
 }
+
+.feed {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.right-card {
+  background: white;
+
+  padding: 18px;
+
+  border-radius: 16px;
+
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+.follow-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  margin-top: 10px;
+}
