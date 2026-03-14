@@ -1136,3 +1136,114 @@ button.primary {
 .reaction-avatar:hover {
   transform: scale(1.1);
 }
+
+.post-reactions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+.reaction-emojis {
+  display: flex;
+  align-items: center;
+}
+
+.reaction-emojis span {
+  font-size: 16px;
+  margin-right: -3px;
+}
+
+.reaction-avatars {
+  display: flex;
+  align-items: center;
+}
+
+.reaction-avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 2px solid white;
+  margin-left: -6px;
+}
+
+.likes-count {
+  margin-left: 6px;
+}
+
+.reaction-emojis span:first-child {
+  margin-left: 0;
+}
+
+.reaction-avatar:first-child {
+  margin-left: 4px;
+}
+
+.post-stats {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #65676b;
+  margin-top: 6px;
+}
+
+.post-reactions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+/* emoji reactions */
+
+.reaction-emojis {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.reaction-emojis span {
+  font-size: 18px;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.reaction-emojis span:hover {
+  transform: translateY(-4px) scale(1.15);
+}
+
+/* avatars */
+
+.reaction-avatars {
+  display: flex;
+  align-items: center;
+}
+
+.reaction-avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid white;
+  margin-left: -6px;
+  transition: transform 0.15s ease;
+}
+
+.reaction-avatar:hover {
+  transform: translateY(-4px) scale(1.1);
+}
+
+.likes-count {
+  margin-left: 8px;
+}
+
+.reaction-emojis span:hover {
+  transform: translateY(-5px) scale(1.2);
+}
+
+.reaction-avatar:hover {
+  transform: translateY(-5px) scale(1.15);
+}
