@@ -31,12 +31,17 @@ export default function Profile() {
 
       <div className="feed">
         <div className="profile-header">
-          <img
-            className="avatar large"
-            src={getAvatar(username)}
-            alt={username}
-          />
-          <h2>{username}</h2>
+          <img src={getAvatar(username)} className="avatar large" />
+
+          <div className="profile-info">
+            <h2>{username}</h2>
+
+            <div className="profile-stats">
+              <span>23 posts</span>
+              <span>120 followers</span>
+              <span>80 following</span>
+            </div>
+          </div>
         </div>
 
         {posts.map((post) => (

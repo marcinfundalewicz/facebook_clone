@@ -892,3 +892,43 @@ button.primary {
 .avatar:hover {
   transform: scale(1.1);
 }
+
+.profile-header {
+  background: white;
+
+  padding: 30px;
+
+  border-radius: 16px;
+
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  margin-bottom: 20px;
+
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+.avatar.large {
+  width: 100px;
+  height: 100px;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.profile-info h2 {
+  margin: 0;
+}
+
+.profile-stats {
+  display: flex;
+  gap: 20px;
+
+  font-size: 14px;
+
+  color: #777;
+}
