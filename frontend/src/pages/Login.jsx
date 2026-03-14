@@ -14,15 +14,21 @@ export default function Login() {
     try {
       const res = await login(email, password);
       setAuthToken(res.data.token);
-    } catch (err) {
+    } catch {
       alert("Login failed");
     }
   }
 
   return (
-    <div className="login-page">
-      <div className="login-card">
+    <div className="login-layout">
+      {/* LEFT SIDE */}
+      <div className="login-hero">
         <h1>FacebookClone</h1>
+      </div>
+
+      {/* RIGHT SIDE */}
+      <div className="login-panel">
+        <h2>Welcome back</h2>
 
         <form onSubmit={handleSubmit}>
           <input
@@ -38,9 +44,7 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <button className="primary" type="submit">
-            Sign in
-          </button>
+          <button type="submit">Sign in</button>
         </form>
       </div>
     </div>

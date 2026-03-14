@@ -1308,3 +1308,80 @@ body.dark .stories {
 .post-card:hover {
   transform: translateY(-2px);
 }
+
+.login-layout {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  height: 100vh;
+}
+
+/* LEFT SIDE */
+
+.login-hero {
+  background: linear-gradient(
+          135deg,
+          #1877f2,
+          #0d47a1
+  );
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+}
+
+.login-hero h1 {
+  font-size: 60px;
+  font-weight: bold;
+}
+
+/* RIGHT PANEL */
+
+.login-panel {
+  background: white;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 60px;
+}
+
+.login-panel h2 {
+  margin-bottom: 30px;
+}
+
+.login-panel form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.login-panel input {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.login-panel button {
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+
+  background: #1877f2;
+  color: white;
+
+  cursor: pointer;
+}
+
+body.dark .login-panel {
+  background: #1c1e21;
+}
+
+body.dark .login-panel input {
+  background: #2a2d31;
+  border: none;
+  color: white;
+}
