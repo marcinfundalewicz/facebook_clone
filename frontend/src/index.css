@@ -2170,3 +2170,40 @@ body.dark .post-buttons button:hover {
 
     border: 2px solid #f0f2f5;
 }
+
+.comment {
+    display: flex;
+    gap: 10px;
+
+    margin-top: 10px;
+}
+
+.comment-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-header {
+    display: flex;
+    gap: 8px;
+
+    font-size: 13px;
+}
+
+.comment-author {
+    font-weight: 600;
+}
+
+.comment-time {
+    color: #65676b;
+    font-size: 12px;
+}
+
+.comment-text {
+    font-size: 14px;
+}
+
+.avatar.small {
+    width: 28px;
+    height: 28px;
+}
