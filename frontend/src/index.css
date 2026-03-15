@@ -2029,3 +2029,50 @@ body.dark .post-buttons button:hover {
 
     margin-top: 8px;
 }
+
+.post-body {
+    display: grid;
+    grid-template-columns: 1fr 140px;
+    gap: 16px;
+    align-items: center;
+
+    margin-top: 10px;
+}
+
+.post-text {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.post-image {
+    width: 140px;
+    height: 100px;
+    object-fit: cover;
+
+    border-radius: 10px;
+}
+
+.post-actions {
+    display: flex;
+    gap: 18px;
+
+    font-size: 14px;
+    color: #666;
+}
+
+.post-actions span {
+    cursor: pointer;
+}
+
+.post-actions span:hover {
+    color: #1877f2;
+}
+
+.post-card {
+    background: white;
+    padding: 16px;
+    border-radius: 14px;
+
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+}

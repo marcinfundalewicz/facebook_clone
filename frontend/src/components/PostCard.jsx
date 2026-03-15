@@ -78,54 +78,34 @@ export default function PostCard({
         </div>
       </div>
 
-      {/* CONTENT */}
+      {/* BODY */}
 
-      <div className="post-content">{content}</div>
+      <div className="post-body">
+        <div className="post-text">
+          <div className="post-content">{content}</div>
 
-      {/* IMAGE */}
+          <div className="post-actions">
+            <span className={liked ? "liked" : ""} onClick={handleLike}>
+              👍 {likes}
+            </span>
 
-      {imageUrl && (
-        <img
-          src={imageUrl}
-          alt="post"
-          className="post-image"
-          onError={(e) => {
-            e.target.style.display = "none";
-          }}
-        />
-      )}
+            <span>💬 {commentsCount}</span>
 
-      {/* META (likes + comments w jednej linii) */}
-
-      <div className="post-meta">
-        <div className="post-reactions">
-          <span>👍</span>
-          <span>❤️</span>
-          <span>😂</span>
-
-          <span className="likes-count">
-            {likes} {likes === 1 ? "like" : "likes"}
-          </span>
+            <span>↗</span>
+          </div>
         </div>
 
-        <div className="comments-count">
-          {commentsCount} {commentsCount === 1 ? "comment" : "comments"}
-        </div>
+        {imageUrl && (
+          <img
+            src={imageUrl}
+            alt="post"
+            className="post-image"
+            onError={(e) => {
+              e.target.style.display = "none";
+            }}
+          />
+        )}
       </div>
-
-      {/* BUTTONS */}
-
-      <div className="post-buttons">
-        <button onClick={handleLike} className={liked ? "liked" : ""}>
-          👍 Like
-        </button>
-
-        <button>💬 Comment</button>
-      </div>
-
-      {/* DIVIDER */}
-
-      <div className="post-divider"></div>
 
       {/* COMMENTS */}
 
