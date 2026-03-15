@@ -2207,3 +2207,42 @@ body.dark .post-buttons button:hover {
     width: 28px;
     height: 28px;
 }
+
+.comment-content {
+    background: #f0f2f5;
+
+    padding: 8px 12px;
+
+    border-radius: 12px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-input input {
+    flex: 1;
+
+    border-radius: 30px;
+
+    border: 1px solid #ddd;
+
+    padding: 8px 14px;
+
+    font-size: 14px;
+}
+
+.post-actions span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    cursor: pointer;
+
+    transition: color .15s ease, transform .15s ease;
+}
+
+.post-actions span:hover {
+    color: #1877f2;
+
+    transform: translateY(-1px);
+}
