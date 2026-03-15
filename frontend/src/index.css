@@ -2415,3 +2415,33 @@ body.dark .post-buttons button:hover {
 
     margin: 10px 0;
 }
+
+.follow-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin-top: 10px;
+}
+
+.follow-btn {
+    margin-left: auto;
+
+    font-size: 12px;
+
+    padding: 4px 8px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background: #1877f2;
+
+    color: white;
+
+    cursor: pointer;
+}
+
+.follow-btn:hover {
+    opacity: 0.9;
+}
