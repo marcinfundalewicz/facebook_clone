@@ -3,6 +3,7 @@ import { toggleLike } from "../api/api";
 import CommentSection from "./CommentSection";
 import { getAvatar } from "../utils/avatar";
 import { Link } from "react-router-dom";
+import UserPreview from "./UserPreview";
 
 export default function PostCard({
   id,
@@ -16,6 +17,7 @@ export default function PostCard({
 }) {
   const [likes, setLikes] = useState(likesCount ?? 0);
   const [liked, setLiked] = useState(likedByMe ?? false);
+  const [hover, setHover] = useState(false);
 
   useEffect(() => {
     setLikes(likesCount ?? 0);
@@ -61,13 +63,21 @@ export default function PostCard({
       {/* HEADER */}
 
       <div className="post-header">
-        <Link to={`/profile/${author}`}>
-          <img
-            className="avatar clickable"
-            src={getAvatar(author)}
-            alt={author}
-          />
-        </Link>
+        <div
+          className="avatar-wrapper"
+          onMouseEnter={() => setHover(true)}
+          onMouseLeave={() => setHover(false)}
+        >
+          <Link to={`/profile/${author}`}>
+            <img
+              className="avatar clickable"
+              src={getAvatar(author)}
+              alt={author}
+            />
+          </Link>
+
+          {hover && <UserPreview username={author} />}
+        </div>
 
         <div className="post-user-info">
           <Link to={`/profile/${author}`} className="post-user clickable">
@@ -93,7 +103,9 @@ export default function PostCard({
             >
               👍 {likes}
             </span>
+
             <span>💬 {commentsCount}</span>
+
             <span>↗</span>
           </div>
         </div>

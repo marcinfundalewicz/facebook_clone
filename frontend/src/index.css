@@ -2297,3 +2297,48 @@ body.dark .post-buttons button:hover {
 .sidebar-item:hover {
     transform: translateX(4px);
 }
+
+.avatar-wrapper {
+    position: relative;
+}
+
+.user-preview {
+    position: absolute;
+
+    top: 50px;
+    left: 0;
+
+    width: 220px;
+
+    background: white;
+
+    border-radius: 12px;
+
+    padding: 12px;
+
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+
+    z-index: 20;
+}
+
+.user-preview-info {
+    margin-top: 8px;
+}
+
+.preview-username {
+    font-weight: 600;
+}
+
+.preview-handle {
+    font-size: 13px;
+    color: #666;
+}
+
+.preview-stats {
+    display: flex;
+    gap: 10px;
+
+    font-size: 12px;
+
+    margin-top: 6px;
+}
