@@ -13,32 +13,36 @@ export default function PostCard({
   commentsCount,
   likedByMe,
   createdAt,
+  onPostUpdated,
 }) {
   const [likes, setLikes] = useState(likesCount ?? 0);
   const [liked, setLiked] = useState(likedByMe ?? false);
+  const [likeLoading, setLikeLoading] = useState(false);
 
   useEffect(() => {
     setLikes(likesCount ?? 0);
   }, [likesCount]);
 
-  useEffect(() => {
-    setLiked(likedByMe ?? false);
-  }, [likedByMe]);
-
   async function handleLike() {
+    if (likeLoading) return;
+
+    setLikeLoading(true);
+
     const newLiked = !liked;
-    const newLikes = newLiked ? likes + 1 : likes - 1;
 
     setLiked(newLiked);
-    setLikes(newLikes);
+    setLikes((prev) => prev + (newLiked ? 1 : -1));
 
     try {
       await toggleLike(id);
+      onPostUpdated();
     } catch (err) {
       console.error("Like failed", err);
 
       setLiked(!newLiked);
-      setLikes(newLiked ? likes - 1 : likes + 1);
+      setLikes((prev) => prev + (newLiked ? -1 : 1));
+    } finally {
+      setLikeLoading(false);
     }
   }
 
@@ -58,8 +62,6 @@ export default function PostCard({
 
   return (
     <div className="post-card">
-      {/* HEADER */}
-
       <div className="post-header">
         <Link to={`/profile/${author}`}>
           <img
@@ -70,76 +72,63 @@ export default function PostCard({
         </Link>
 
         <div className="post-user-info">
-          <Link to={`/profile/${author}`} className="post-user clickable">
+          <Link to={`/profile/${author}`} className="post-user-clickable">
             {author}
           </Link>
 
-          <div className="time">{timeAgo(createdAt)}</div>
+          <div className="post-meta-info">
+            @{author} • {timeAgo(createdAt)}
+          </div>
         </div>
+
+        <div className="post-options">•••</div>
       </div>
 
-      {/* CONTENT */}
+      <div className="post-body">
+        <p className="post-content">{content}</p>
 
-      <div className="post-content">{content}</div>
-
-      {/* IMAGE */}
-
-      {imageUrl && (
-        <img
-          src={imageUrl}
-          alt="post"
-          className="post-image"
-          onError={(e) => {
-            e.target.style.display = "none";
-          }}
-        />
-      )}
-
-      {/* REACTIONS */}
-
-      <div className="post-reactions">
-        <div className="reaction-emojis">
-          <span>👍</span>
-          <span>❤️</span>
-          <span>😂</span>
-        </div>
-
-        <div className="reaction-avatars">
-          {[...Array(Math.min(likes, 3))].map((_, i) => (
-            <img
-              key={i}
-              src={getAvatar("like" + i)}
-              className="reaction-avatar"
-            />
-          ))}
-        </div>
-
-        <span className="likes-count">
-          {likes} {likes === 1 ? "like" : "likes"}
-        </span>
+        {imageUrl && (
+          <img
+            src={imageUrl}
+            alt="post"
+            className="post-image"
+            onError={(e) => (e.target.style.display = "none")}
+          />
+        )}
       </div>
-
-      {/* POST STATS */}
 
       <div className="post-stats">
-        <span className="comments-count">{commentsCount} comments</span>
+        <div className="post-left-stats">
+          👍 ❤️ 😂
+          <span className="likes-count">
+            {likes} {likes === 1 ? "like" : "likes"}
+          </span>
+        </div>
+
+        <div className="post-right-stats">
+          {commentsCount} comments • 124 views
+        </div>
       </div>
 
-      {/* BUTTONS */}
-
       <div className="post-buttons">
-        <button onClick={handleLike} className={liked ? "liked" : ""}>
-          👍 Like
+        <button
+          onClick={handleLike}
+          disabled={likeLoading}
+          className={liked ? "liked" : ""}
+        >
+          👍 {liked ? "Liked" : "Like"}
         </button>
 
         <button>💬 Comment</button>
+
+        <button>↗ Share</button>
       </div>
 
-      {/* DIVIDER */}
+      {commentsCount > 0 && (
+        <div className="view-comments">View {commentsCount} comments</div>
+      )}
 
       <div className="post-divider"></div>
-
-      {/* COMMENTS */}
 
       <CommentSection postId={id} />
     </div>

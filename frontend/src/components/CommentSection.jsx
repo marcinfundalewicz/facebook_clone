@@ -17,12 +17,9 @@ export default function CommentSection({ postId }) {
         console.error("Load comments failed", err);
       }
     }
+
     load();
   }, [postId]);
-
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [comments]);
 
   async function handleAddComment(e) {
     e.preventDefault();
@@ -46,6 +43,11 @@ export default function CommentSection({ postId }) {
     } finally {
       setSending(false);
     }
+
+    // scroll tylko po dodaniu komentarza
+    setTimeout(() => {
+      bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, 50);
   }
 
   function timeAgo(date) {
@@ -55,11 +57,11 @@ export default function CommentSection({ postId }) {
     const minutes = Math.floor(seconds / 60);
     const hours = Math.floor(seconds / 3600);
 
-    if (minutes < 1) return "just now";
-    if (minutes < 60) return minutes + " min ago";
-    if (hours < 24) return hours + " h ago";
+    if (minutes < 1) return "now";
+    if (minutes < 60) return minutes + "m";
+    if (hours < 24) return hours + "h";
 
-    return Math.floor(hours / 24) + " d ago";
+    return Math.floor(hours / 24) + "d";
   }
 
   return (
@@ -72,11 +74,13 @@ export default function CommentSection({ postId }) {
             alt={c.authorUsername}
           />
 
-          <div className="comment-bubble">
-            <strong>{c.authorUsername}</strong>
-            <div>{c.content}</div>
+          <div className="comment-content">
+            <div className="comment-header">
+              <span className="comment-author">{c.authorUsername}</span>
+              <span className="comment-time">{timeAgo(c.createdAt)}</span>
+            </div>
 
-            <div className="comment-time">{timeAgo(c.createdAt)}</div>
+            <div className="comment-text">{c.content}</div>
           </div>
         </div>
       ))}

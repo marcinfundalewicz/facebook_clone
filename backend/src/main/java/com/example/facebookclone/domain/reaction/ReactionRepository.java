@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface ReactionRepository extends JpaRepository<Reaction, Long> {
-    Optional<Reaction> findByPostAndUser(Post post, User user);
+    Optional<Reaction> findByPost_IdAndUser_Id(Long postId, Long userId);
 
     long countByPost(Post post);
 

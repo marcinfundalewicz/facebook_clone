@@ -15,28 +15,29 @@ export default function Feed() {
 
   const mode = "all";
 
-  useEffect(() => {
-    async function loadPosts() {
-      try {
-        setLoading(true);
-        const res = mode === "all" ? await getPosts() : await getSocialFeed();
-        setPosts(res.data.content);
-      } catch (err) {
-        console.error("Failed to load posts", err);
-        setError("Failed to load feed");
-      } finally {
-        setLoading(false);
-      }
+  // WYCIĄGNIĘTE Z useEffect
+  async function loadPosts() {
+    try {
+      setLoading(true);
+      const res = mode === "all" ? await getPosts() : await getSocialFeed();
+      setPosts(res.data.content);
+    } catch (err) {
+      console.error("Failed to load posts", err);
+      setError("Failed to load feed");
+    } finally {
+      setLoading(false);
     }
+  }
 
+  useEffect(() => {
     loadPosts();
   }, [mode]);
 
   async function handleAddPost(content, imageUrl) {
     try {
       await createPost(content, imageUrl);
-      const res = await getPosts();
-      setPosts(res.data.content);
+
+      await loadPosts();
 
       window.scrollTo({ top: 0, behavior: "smooth" });
 
@@ -79,10 +80,8 @@ export default function Feed() {
 
   return (
     <div className="layout">
-      {/* LEFT SIDEBAR */}
       <Sidebar />
 
-      {/* FEED */}
       <div className="feed">
         <Stories />
         <CreatePost onAddPost={handleAddPost} />
@@ -98,14 +97,13 @@ export default function Feed() {
             commentsCount={post.commentsCount}
             likedByMe={post.likedByMe}
             createdAt={post.createdAt}
+            onPostUpdated={loadPosts}
           />
         ))}
       </div>
 
-      {/* RIGHT PANEL */}
       <RightPanel />
 
-      {/* TOAST */}
       {toast && <Toast message={toast} onClose={() => setToast(null)} />}
     </div>
   );

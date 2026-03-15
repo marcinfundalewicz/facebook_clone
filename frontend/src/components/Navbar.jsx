@@ -22,12 +22,12 @@ export default function Navbar({ onLogout }) {
 
   const filtered = users
     .filter((u) => u.username.toLowerCase().includes(search.toLowerCase()))
-    .slice(0, 5); // max 5 wyników
+    .slice(0, 5);
 
   async function handleAddFriend(id) {
     try {
       await addFriend(id);
-      alert("Friend request sent");
+      setSearch(""); // zamknij search
     } catch (err) {
       console.error("Friend request failed", err);
     }
@@ -40,6 +40,7 @@ export default function Navbar({ onLogout }) {
 
   return (
     <div className="navbar">
+      {/* LOGO */}
       <div className="logo">FacebookClone</div>
 
       {/* SEARCH */}
@@ -54,21 +55,37 @@ export default function Navbar({ onLogout }) {
           <div className="search-results">
             {filtered.map((u) => (
               <div className="search-item" key={u.id}>
+                <img
+                  src={getAvatar(u.username)}
+                  className="avatar small"
+                  alt={u.username}
+                />
+
                 <span>{u.username}</span>
 
-                <button onClick={() => handleAddFriend(u.id)}>Add</button>
+                <button
+                  className="add-btn"
+                  onClick={() => handleAddFriend(u.id)}
+                >
+                  Add
+                </button>
               </div>
             ))}
           </div>
         )}
       </div>
 
+      {/* RIGHT SIDE */}
       <div className="nav-right">
-        <button className="mode-toggle" onClick={toggleDarkMode}>
-          {dark ? "☀️" : "🌙"}
-        </button>
+        <div className="nav-icon">🔔</div>
 
-        <img className="avatar small" src={getAvatar("me")} alt="my profile" />
+        <div className="nav-icon">💬</div>
+
+        <div className="nav-icon" onClick={toggleDarkMode}>
+          {dark ? "☀️" : "🌙"}
+        </div>
+
+        <img src={getAvatar("You")} className="avatar small" alt="profile" />
 
         <button className="logout-btn" onClick={onLogout}>
           Logout
