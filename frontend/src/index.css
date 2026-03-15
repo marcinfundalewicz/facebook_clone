@@ -2124,3 +2124,49 @@ body.dark .post-buttons button:hover {
 
     box-shadow: 0 10px 28px rgba(0,0,0,0.15);
 }
+
+.post-user-info {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.post-user {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.post-time {
+    font-size: 13px;
+    color: #65676b;
+}
+
+.avatar {
+    width: 38px;
+    height: 38px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+}
+
+.post-user {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.post-meta-info {
+    font-size: 13px;
+    color: #65676b;
+}
+
+.avatar {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    border: 2px solid #f0f2f5;
+}

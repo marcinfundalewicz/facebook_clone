@@ -74,7 +74,9 @@ export default function PostCard({
             {author}
           </Link>
 
-          <div className="time">{timeAgo(createdAt)}</div>
+          <div className="post-meta-info">
+            @{author} • {timeAgo(createdAt)}
+          </div>
         </div>
       </div>
 
