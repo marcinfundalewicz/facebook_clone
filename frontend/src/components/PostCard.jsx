@@ -17,7 +17,6 @@ export default function PostCard({
 }) {
   const [likes, setLikes] = useState(likesCount ?? 0);
   const [liked, setLiked] = useState(likedByMe ?? false);
-  const [hover, setHover] = useState(false);
 
   useEffect(() => {
     setLikes(likesCount ?? 0);
@@ -61,23 +60,14 @@ export default function PostCard({
   return (
     <div className="post-card">
       {/* HEADER */}
-
       <div className="post-header">
-        <div
-          className="avatar-wrapper"
-          onMouseEnter={() => setHover(true)}
-          onMouseLeave={() => setHover(false)}
-        >
-          <Link to={`/profile/${author}`}>
-            <img
-              className="avatar clickable"
-              src={getAvatar(author)}
-              alt={author}
-            />
-          </Link>
-
-          {hover && <UserPreview username={author} />}
-        </div>
+        <Link to={`/profile/${author}`}>
+          <img
+            className="avatar clickable"
+            src={getAvatar(author)}
+            alt={author}
+          />
+        </Link>
 
         <div className="post-user-info">
           <Link to={`/profile/${author}`} className="post-user clickable">
@@ -88,10 +78,11 @@ export default function PostCard({
             @{author} • {timeAgo(createdAt)}
           </div>
         </div>
+
+        <div className="post-options">•••</div>
       </div>
 
       {/* BODY */}
-
       <div className="post-body">
         <div className="post-text">
           <div className="post-content">{content}</div>
@@ -123,7 +114,6 @@ export default function PostCard({
       </div>
 
       {/* COMMENTS */}
-
       <CommentSection postId={id} />
     </div>
   );
