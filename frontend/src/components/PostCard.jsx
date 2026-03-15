@@ -3,7 +3,6 @@ import { toggleLike } from "../api/api";
 import CommentSection from "./CommentSection";
 import { getAvatar } from "../utils/avatar";
 import { Link } from "react-router-dom";
-import UserPreview from "./UserPreview";
 
 export default function PostCard({
   id,
@@ -14,32 +13,36 @@ export default function PostCard({
   commentsCount,
   likedByMe,
   createdAt,
+  onPostUpdated,
 }) {
   const [likes, setLikes] = useState(likesCount ?? 0);
   const [liked, setLiked] = useState(likedByMe ?? false);
+  const [likeLoading, setLikeLoading] = useState(false);
 
   useEffect(() => {
     setLikes(likesCount ?? 0);
   }, [likesCount]);
 
-  useEffect(() => {
-    setLiked(likedByMe ?? false);
-  }, [likedByMe]);
-
   async function handleLike() {
+    if (likeLoading) return;
+
+    setLikeLoading(true);
+
     const newLiked = !liked;
-    const newLikes = newLiked ? likes + 1 : likes - 1;
 
     setLiked(newLiked);
-    setLikes(newLikes);
+    setLikes((prev) => prev + (newLiked ? 1 : -1));
 
     try {
       await toggleLike(id);
+      onPostUpdated();
     } catch (err) {
       console.error("Like failed", err);
 
       setLiked(!newLiked);
-      setLikes(newLiked ? likes - 1 : likes + 1);
+      setLikes((prev) => prev + (newLiked ? -1 : 1));
+    } finally {
+      setLikeLoading(false);
     }
   }
 
@@ -59,7 +62,6 @@ export default function PostCard({
 
   return (
     <div className="post-card">
-      {/* HEADER */}
       <div className="post-header">
         <Link to={`/profile/${author}`}>
           <img
@@ -82,36 +84,52 @@ export default function PostCard({
         <div className="post-options">•••</div>
       </div>
 
-      {/* BODY */}
       <div className="post-body">
-        <div className="post-content">{content}</div>
+        <p className="post-content">{content}</p>
 
         {imageUrl && (
           <img
             src={imageUrl}
             alt="post"
             className="post-image"
-            onError={(e) => {
-              e.target.style.display = "none";
-            }}
+            onError={(e) => (e.target.style.display = "none")}
           />
         )}
+      </div>
 
-        <div className="post-actions">
-          <span
-            onClick={handleLike}
-            className={`like-button ${liked ? "liked" : ""}`}
-          >
-            👍 {likes}
+      <div className="post-stats">
+        <div className="post-left-stats">
+          👍 ❤️ 😂
+          <span className="likes-count">
+            {likes} {likes === 1 ? "like" : "likes"}
           </span>
+        </div>
 
-          <span>💬 {commentsCount}</span>
-
-          <span>↗</span>
+        <div className="post-right-stats">
+          {commentsCount} comments • 124 views
         </div>
       </div>
 
-      {/* COMMENTS */}
+      <div className="post-buttons">
+        <button
+          onClick={handleLike}
+          disabled={likeLoading}
+          className={liked ? "liked" : ""}
+        >
+          👍 {liked ? "Liked" : "Like"}
+        </button>
+
+        <button>💬 Comment</button>
+
+        <button>↗ Share</button>
+      </div>
+
+      {commentsCount > 0 && (
+        <div className="view-comments">View {commentsCount} comments</div>
+      )}
+
+      <div className="post-divider"></div>
+
       <CommentSection postId={id} />
     </div>
   );

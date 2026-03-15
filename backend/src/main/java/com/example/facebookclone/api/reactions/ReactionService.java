@@ -25,7 +25,8 @@ public class ReactionService {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new NotFoundException("Post not found"));
 
-        reactionRepository.findByPostAndUser(post, user)
+        reactionRepository
+                .findByPost_IdAndUser_Id(postId, user.getId())
                 .ifPresentOrElse(
                         reactionRepository::delete,
                         () -> {
@@ -34,6 +35,7 @@ public class ReactionService {
                             reaction.setUser(user);
                             reaction.setType("LIKE");
                             reaction.setCreatedAt(LocalDateTime.now());
+
                             reactionRepository.save(reaction);
                         }
                 );
