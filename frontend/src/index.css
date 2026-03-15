@@ -2548,3 +2548,11 @@ body.dark .post-buttons button:hover {
     background: #e4e6eb;
     margin: 10px 0;
 }
+
+.post-image {
+    width: 100%;
+    max-height: 420px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-top: 12px;
+}

@@ -84,22 +84,7 @@ export default function PostCard({
 
       {/* BODY */}
       <div className="post-body">
-        <div className="post-text">
-          <div className="post-content">{content}</div>
-
-          <div className="post-actions">
-            <span
-              onClick={handleLike}
-              className={`like-button ${liked ? "liked" : ""}`}
-            >
-              👍 {likes}
-            </span>
-
-            <span>💬 {commentsCount}</span>
-
-            <span>↗</span>
-          </div>
-        </div>
+        <div className="post-content">{content}</div>
 
         {imageUrl && (
           <img
@@ -111,6 +96,19 @@ export default function PostCard({
             }}
           />
         )}
+
+        <div className="post-actions">
+          <span
+            onClick={handleLike}
+            className={`like-button ${liked ? "liked" : ""}`}
+          >
+            👍 {likes}
+          </span>
+
+          <span>💬 {commentsCount}</span>
+
+          <span>↗</span>
+        </div>
       </div>
 
       {/* COMMENTS */}
