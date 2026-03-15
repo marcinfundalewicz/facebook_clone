@@ -87,12 +87,13 @@ export default function PostCard({
           <div className="post-content">{content}</div>
 
           <div className="post-actions">
-            <span className={liked ? "liked" : ""} onClick={handleLike}>
+            <span
+              onClick={handleLike}
+              className={`like-button ${liked ? "liked" : ""}`}
+            >
               👍 {likes}
             </span>
-
             <span>💬 {commentsCount}</span>
-
             <span>↗</span>
           </div>
         </div>
