@@ -2464,3 +2464,42 @@ body.dark .post-buttons button:hover {
 .nav-icon:hover {
     background: #f0f2f5;
 }
+
+.layout {
+    max-width: 1100px;
+    margin: 20px auto;
+}
+
+.post-image {
+    width: 100%;
+    max-height: 420px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-top: 10px;
+}
+
+.post-card {
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.post-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.story-avatar {
+    width: 64px;
+    height: 64px;
+}
+
+.story {
+    min-width: 70px;
+}
+
+.feed {
+    gap: 24px;
+}
+
+.post-actions span {
+    cursor: pointer;
+}
