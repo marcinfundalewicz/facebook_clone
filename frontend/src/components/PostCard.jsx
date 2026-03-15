@@ -72,7 +72,7 @@ export default function PostCard({
         </Link>
 
         <div className="post-user-info">
-          <Link to={`/profile/${author}`} className="post-user clickable">
+          <Link to={`/profile/${author}`} className="post-user-clickable">
             {author}
           </Link>
 
