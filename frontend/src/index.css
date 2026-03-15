@@ -2445,3 +2445,22 @@ body.dark .post-buttons button:hover {
 .follow-btn:hover {
     opacity: 0.9;
 }
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.nav-icon {
+    font-size: 18px;
+    cursor: pointer;
+
+    padding: 6px;
+
+    border-radius: 50%;
+}
+
+.nav-icon:hover {
+    background: #f0f2f5;
+}

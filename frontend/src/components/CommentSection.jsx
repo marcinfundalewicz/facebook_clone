@@ -7,6 +7,7 @@ export default function CommentSection({ postId }) {
   const [content, setContent] = useState("");
   const [sending, setSending] = useState(false);
   const bottomRef = useRef(null);
+  const firstLoad = useRef(true);
 
   useEffect(() => {
     async function load() {
@@ -22,6 +23,11 @@ export default function CommentSection({ postId }) {
   }, [postId]);
 
   useEffect(() => {
+    if (firstLoad.current) {
+      firstLoad.current = false;
+      return;
+    }
+
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [comments]);
 

@@ -64,15 +64,13 @@ export default function Navbar({ onLogout }) {
       </div>
 
       <div className="nav-right">
-        <button className="mode-toggle" onClick={toggleDarkMode}>
-          {dark ? "☀️" : "🌙"}
-        </button>
+        <div className="nav-icon">🔔</div>
 
-        <img className="avatar small" src={getAvatar("me")} alt="my profile" />
+        <div className="nav-icon">💬</div>
 
-        <button className="logout-btn" onClick={onLogout}>
-          Logout
-        </button>
+        <div className="nav-icon">➕</div>
+
+        <img src={getAvatar("You")} className="avatar small" />
       </div>
     </div>
   );
