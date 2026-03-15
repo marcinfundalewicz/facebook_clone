@@ -95,34 +95,22 @@ export default function PostCard({
         />
       )}
 
-      {/* REACTIONS */}
+      {/* META (likes + comments w jednej linii) */}
 
-      <div className="post-reactions">
-        <div className="reaction-emojis">
+      <div className="post-meta">
+        <div className="post-reactions">
           <span>👍</span>
           <span>❤️</span>
           <span>😂</span>
+
+          <span className="likes-count">
+            {likes} {likes === 1 ? "like" : "likes"}
+          </span>
         </div>
 
-        <div className="reaction-avatars">
-          {[...Array(Math.min(likes, 3))].map((_, i) => (
-            <img
-              key={i}
-              src={getAvatar("like" + i)}
-              className="reaction-avatar"
-            />
-          ))}
+        <div className="comments-count">
+          {commentsCount} {commentsCount === 1 ? "comment" : "comments"}
         </div>
-
-        <span className="likes-count">
-          {likes} {likes === 1 ? "like" : "likes"}
-        </span>
-      </div>
-
-      {/* POST STATS */}
-
-      <div className="post-stats">
-        <span className="comments-count">{commentsCount} comments</span>
       </div>
 
       {/* BUTTONS */}

@@ -2018,3 +2018,14 @@ body.dark .post-buttons button:hover {
 .avatar:hover {
     transform: scale(1.08);
 }
+
+.post-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    font-size: 14px;
+    color: #65676b;
+
+    margin-top: 8px;
+}
