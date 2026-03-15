@@ -2556,3 +2556,32 @@ body.dark .post-buttons button:hover {
     border-radius: 12px;
     margin-top: 12px;
 }
+
+.post-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.post-image {
+    width: 100%;
+    max-height: 420px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-top: 10px;
+}
+
+.post-actions {
+    display: flex;
+    gap: 16px;
+    margin-top: 6px;
+    color: #65676b;
+}
+
+.post-actions span {
+    cursor: pointer;
+}
+
+.post-actions span:hover {
+    color: #1877f2;
+}
