@@ -8,6 +8,11 @@ const users = [
   "Daniel",
   "Olivia",
   "Noah",
+  "Ava",
+  "Liam",
+  "Mia",
+  "James",
+  "Isabella",
 ];
 
 export default function Stories() {

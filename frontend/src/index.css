@@ -2342,3 +2342,68 @@ body.dark .post-buttons button:hover {
 
     margin-top: 6px;
 }
+
+.post-body {
+    display: grid;
+
+    grid-template-columns: 1fr 200px;
+
+    gap: 16px;
+
+    align-items: center;
+
+    margin-top: 12px;
+
+    overflow: hidden;
+}
+
+.post-image {
+    width: 100%;
+    max-width: 200px;
+
+    height: 140px;
+
+    object-fit: cover;
+
+    border-radius: 12px;
+
+    transition: transform .2s ease;
+}
+
+.stories {
+    display: flex;
+    gap: 16px;
+
+    overflow-x: auto;
+
+    padding: 14px;
+
+    background: white;
+
+    border-radius: 16px;
+
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+.story {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    font-size: 12px;
+
+    cursor: pointer;
+
+    min-width: 60px;
+}
+
+.story-avatar {
+    width: 60px;
+    height: 60px;
+
+    border-radius: 50%;
+
+    border: 3px solid #1877f2;
+
+    margin-bottom: 4px;
+}
