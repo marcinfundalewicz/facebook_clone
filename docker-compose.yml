@@ -1,0 +1,42 @@
+services:
+
+  mysql:
+    image: mysql:8
+    container_name: facebook-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: facebook_clone
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  backend:
+    build: ./backend
+    container_name: facebook-backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/facebook_clone
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: admin
+    entrypoint: ["sh", "-c", "sleep 30 && java -jar app.jar"]
+
+  frontend:
+    build: ./frontend
+    container_name: facebook-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+volumes:
+          mysql-data:
