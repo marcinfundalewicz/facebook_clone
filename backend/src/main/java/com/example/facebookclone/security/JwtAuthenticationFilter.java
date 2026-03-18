@@ -33,30 +33,36 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             FilterChain filterChain
     ) throws ServletException, IOException {
 
+        // 🔥 KLUCZOWE
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+        String authHeader = request.getHeader("Authorization");
+
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         try {
+            String token = authHeader.substring(7);
+            String subject = jwtService.extractSubject(token);
 
-            String authHeader = request.getHeader("Authorization");
+            User user = userRepository.findByEmail(subject)
+                    .orElse(null);
 
-            if (authHeader != null && authHeader.startsWith("Bearer ")) {
+            if (user != null && jwtService.isTokenValid(token, subject)) {
 
-                String token = authHeader.substring(7);
+                UsernamePasswordAuthenticationToken auth =
+                        new UsernamePasswordAuthenticationToken(
+                                user,
+                                null,
+                                List.of()
+                        );
 
-                String subject = jwtService.extractSubject(token);
-
-                User user = userRepository.findByEmail(subject)
-                        .orElse(null);
-
-                if (user != null && jwtService.isTokenValid(token, subject)) {
-
-                    UsernamePasswordAuthenticationToken auth =
-                            new UsernamePasswordAuthenticationToken(
-                                    user,
-                                    null,
-                                    List.of()
-                            );
-
-                    SecurityContextHolder.getContext().setAuthentication(auth);
-                }
+                SecurityContextHolder.getContext().setAuthentication(auth);
             }
 
         } catch (Exception e) {
