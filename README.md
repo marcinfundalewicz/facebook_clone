@@ -1,33 +1,143 @@
-# Facebook Clone — projekt edukacyjny
+# 🚀 Facebook Clone (Fullstack App)
 
-Aplikacja webowa typu social network tworzona w celach nauki nowoczesnego fullstacku.
+A modern fullstack social media application inspired by Facebook, built with **React + Spring Boot + MySQL + Docker**.
 
-**Stack technologiczny:**
-Java, Spring Boot, Hibernate, MySQL, Liquibase, React (SPA), Docker.
+This project demonstrates a production-like architecture including authentication with JWT, layered backend structure, and containerized deployment.
 
-## Zakres MVP
+---
 
-- rejestracja i logowanie użytkowników (JWT)
-- profil użytkownika
-- posty
-- komentarze
-- reakcje (lajki)
-- znajomi (zaproszenia / akceptacja)
-- feed (wpisy własne + znajomych)
+# 🧠 Tech Stack
 
-## Architektura
+### Backend
+- Java 17
+- Spring Boot
+- Spring Security (JWT)
+- Spring Data JPA / Hibernate
+- Liquibase (database migrations)
 
-- Backend: Spring Boot — REST API (`/api/**`)
-- Frontend: React SPA (Vite)
-- Baza danych: MySQL (zarządzana przez Liquibase)
-- Dokumentacja: katalog `docs`
+### Frontend
+- React
+- Vite
+- Axios
 
-## Struktura projektu
+### Database
+- MySQL (Docker)
 
-- `backend` — REST API + logika domenowa
-- `frontend` — aplikacja SPA (React)
-- `docs` — dokumentacja, diagramy, decyzje architektoniczne
+### DevOps
+- Docker
+- Docker Compose
 
-## Status projektu
+---
 
-Projekt w trakcie realizacji — aktualnie ukończony etap architektury, bazy danych oraz kontraktu API.
+# ✨ Features
+
+- 🔐 User registration & login (JWT)
+- 📝 Create posts (with optional image)
+- ❤️ Likes / reactions
+- 💬 Comments system
+- 👥 Friends system
+- 📰 User feed
+- 🔎 Suggested users & activity
+
+---
+
+# 🏗️ Architecture
+
+Frontend → API → Backend → Database
+
+- Controller → Service → Repository (backend)
+- Components → Services → API (frontend)
+
+---
+
+# 🐳 Docker Setup
+
+The application runs in 3 containers:
+
+- backend (Spring Boot)
+- frontend (React + nginx)
+- mysql (database)
+
+---
+
+# 🚀 Getting Started
+
+## Requirements
+- Docker
+
+## Run
+
+```bash
+docker-compose up --build
+```
+
+## Access
+
+- Frontend: http://localhost:3000
+- Backend: http://localhost:8080
+
+---
+
+# 🔐 Authentication (JWT)
+
+Each request includes:
+
+```
+Authorization: Bearer <token>
+```
+
+---
+
+# 📸 Screenshots
+
+### 🏠 Feed
+![Feed](./screenshots/feed.png)
+
+### 🔐 Login
+![Login](./screenshots/login.png)
+
+### 📝 Register
+![Register](./screenshots/register.png)
+
+### 👤 Profile + Comments
+![Profile](./screenshots/profile.png)
+
+### 🏗️ Architecture
+![Architecture](./screenshots/architecture.png)
+
+---
+
+# 📦 Project Structure
+
+```
+backend/     -> Spring Boot API  
+frontend/    -> React app  
+screenshots/ -> images used in README  
+```
+
+---
+
+# 💡 Why this project?
+
+- practice fullstack architecture
+- implement JWT authentication
+- learn Docker in real-world setup
+- build social media app
+
+---
+
+# 👨‍💻 Author
+
+Marcin Fundalewicz
+
+---
+
+# 🔥 Summary
+
+Fullstack application with:
+
+- authentication
+- database
+- Docker environment
+
+Ready to run with a single command.
