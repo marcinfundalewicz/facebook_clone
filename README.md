@@ -19,6 +19,7 @@ This project demonstrates a production-like architecture including authenticatio
 - React
 - Vite
 - Axios
+- HTML / CSS / JavaScript
 
 ### Database
 - MySQL (Docker)
@@ -50,13 +51,21 @@ Frontend → API → Backend → Database
 
 ---
 
+# 🧪 Testing
+
+The project includes both unit tests and integration tests.
+-	Unit tests (JUnit, Mockito): test business logic in service layer using mocks
+-	Integration tests: verify full application flow (controllers → database)
+
+---
+
 # 🐳 Docker Setup
 
 The application runs in 3 containers:
 
-- backend (Spring Boot)
-- frontend (React + nginx)
-- mysql (database)
+- Backend (Spring Boot)
+- Frontend (React + nginx)
+- Mysql (database)
 
 ---
 
@@ -119,10 +128,10 @@ screenshots/ -> images used in README
 
 # 💡 Why this project?
 
-- practice fullstack architecture
-- implement JWT authentication
-- learn Docker in real-world setup
-- build social media app
+- Practice fullstack architecture
+- Implement JWT authentication
+- Learn Docker in real-world setup
+- Build social media app
 
 ---
 
@@ -136,8 +145,8 @@ Marcin Fundalewicz
 
 Fullstack application with:
 
-- authentication
-- database
+- Authentication
+- Database
 - Docker environment
 
 Ready to run with a single command.
